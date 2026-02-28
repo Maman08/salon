@@ -1,4 +1,41 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# ✨ Unique Vibe Grenix — Premium Beauty E-Commerce
+
+A stunning, cinematic beauty e-commerce experience built for **Unique Vibe Grenix** salon. Features immersive 3D visuals, buttery smooth animations, and a luxury dark theme designed to wow clients.
+
+## 🚀 Tech Stack
+
+- **Framework**: Next.js 15 (App Router, TypeScript)
+- **3D Visuals**: Three.js + React Three Fiber + Drei
+- **Animations**: Framer Motion + GSAP
+- **Styling**: Tailwind CSS v4 (custom design system)
+- **Smooth Scroll**: Lenis
+- **Icons**: Lucide React
+
+## 📁 Pages
+
+| Page | Route | Description |
+|------|-------|-------------|
+| Home | `/` | Cinematic hero with 3D scene, featured products, categories, testimonials |
+| Shop | `/shop` | Full product grid with filters, categories, sorting |
+| Product Detail | `/product/[id]` | Immersive product page with gallery, tabs, related products |
+| Collections | `/collections` | Themed product collections with parallax cards |
+| Salon Looks | `/salon` | Instagram-style gallery of salon work with shoppable products |
+| About | `/about` | Parallax storytelling with timeline and brand values |
+| Wishlist | `/wishlist` | Saved products page |
+| Account | `/account` | User account / sign-in page |
+
+## 🎨 Design Features
+
+- Custom cursor with hover effects
+- Smooth scroll (Lenis)
+- 3D floating spheres & gold particles in hero
+- Glass morphism components
+- Scroll-triggered reveal animations
+- Product hover effects with add-to-cart
+- Slide-out cart drawer
+- Gold/Rose gradient design system
+- Custom scrollbar
+- Mobile-first responsive design
 
 ## Getting Started
 
