@@ -1,11 +1,11 @@
 "use client";
 
-import { useRef, useMemo } from "react";
+import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, Sphere, Environment, MeshWobbleMaterial } from "@react-three/drei";
+import { Float, MeshDistortMaterial, Sphere, Environment } from "@react-three/drei";
 import * as THREE from "three";
 
-function OrganicBlob({
+function GlowingSphere({
   position,
   color,
   speed,
@@ -20,44 +20,41 @@ function OrganicBlob({
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * speed * 0.2;
-      meshRef.current.rotation.z = state.clock.elapsedTime * speed * 0.3;
+      meshRef.current.rotation.x = state.clock.elapsedTime * speed * 0.3;
+      meshRef.current.rotation.y = state.clock.elapsedTime * speed * 0.5;
     }
   });
 
   return (
-    <Float speed={speed} rotationIntensity={0.3} floatIntensity={1.2}>
+    <Float speed={speed} rotationIntensity={0.4} floatIntensity={1.5}>
       <Sphere ref={meshRef} args={[size, 64, 64]} position={position}>
         <MeshDistortMaterial
           color={color}
-          roughness={0.6}
-          metalness={0.1}
-          distort={0.4}
-          speed={1.5}
+          roughness={0.1}
+          metalness={0.9}
+          distort={0.3}
+          speed={2}
           transparent
-          opacity={0.35}
+          opacity={0.6}
         />
       </Sphere>
     </Float>
   );
 }
 
-function LeafParticles() {
+function GoldParticles() {
   const particlesRef = useRef<THREE.Points>(null);
-  const count = 150;
+  const count = 200;
 
-  const positions = useMemo(() => {
-    const pos = new Float32Array(count * 3);
-    for (let i = 0; i < count * 3; i++) {
-      pos[i] = (Math.random() - 0.5) * 12;
-    }
-    return pos;
-  }, []);
+  const positions = new Float32Array(count * 3);
+  for (let i = 0; i < count * 3; i++) {
+    positions[i] = (Math.random() - 0.5) * 10;
+  }
 
   useFrame((state) => {
     if (particlesRef.current) {
-      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.015;
-      particlesRef.current.rotation.x = Math.sin(state.clock.elapsedTime * 0.01) * 0.1;
+      particlesRef.current.rotation.y = state.clock.elapsedTime * 0.03;
+      particlesRef.current.rotation.x = state.clock.elapsedTime * 0.02;
     }
   });
 
@@ -70,57 +67,32 @@ function LeafParticles() {
         />
       </bufferGeometry>
       <pointsMaterial
-        size={0.02}
+        size={0.015}
         color="#c9a96e"
         transparent
-        opacity={0.4}
+        opacity={0.6}
         sizeAttenuation
       />
     </points>
   );
 }
 
-function FloatingRing({ position, color, scale }: { position: [number, number, number]; color: string; scale: number }) {
-  const meshRef = useRef<THREE.Mesh>(null);
-  
-  useFrame((state) => {
-    if (meshRef.current) {
-      meshRef.current.rotation.x = state.clock.elapsedTime * 0.3;
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.2;
-    }
-  });
-
-  return (
-    <Float speed={1} rotationIntensity={0.5} floatIntensity={1}>
-      <mesh ref={meshRef} position={position} scale={scale}>
-        <torusGeometry args={[1, 0.02, 16, 100]} />
-        <meshStandardMaterial color={color} transparent opacity={0.2} />
-      </mesh>
-    </Float>
-  );
-}
-
 function Scene() {
   return (
     <>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[5, 5, 5]} intensity={0.5} color="#f5f0e8" />
-      <directionalLight position={[-3, 3, -3]} intensity={0.3} color="#c9a96e" />
-      <pointLight position={[0, 2, 3]} intensity={0.3} color="#d4a0a0" />
+      <ambientLight intensity={0.2} />
+      <directionalLight position={[5, 5, 5]} intensity={0.5} color="#c9a96e" />
+      <directionalLight position={[-5, 3, -5]} intensity={0.3} color="#d4a0a0" />
+      <pointLight position={[0, 0, 3]} intensity={0.5} color="#c9a96e" />
 
-      {/* Glowing spheres in gold & rose */}
-      <OrganicBlob position={[-3, 1.5, -2]} color="#c9a96e" speed={1.2} size={1.0} />
-      <OrganicBlob position={[3, -0.5, -3]} color="#d4a0a0" speed={0.9} size={0.8} />
-      <OrganicBlob position={[0.5, 2.5, -2]} color="#e4d5b7" speed={1.5} size={0.5} />
-      <OrganicBlob position={[-1.5, -2, -1]} color="#b07878" speed={0.7} size={0.6} />
-      <OrganicBlob position={[2, 1.5, -4]} color="#a88b4a" speed={1.3} size={0.9} />
+      <GlowingSphere position={[-2.5, 1, -1]} color="#c9a96e" speed={1.5} size={0.8} />
+      <GlowingSphere position={[2.8, -0.5, -2]} color="#d4a0a0" speed={1.2} size={0.6} />
+      <GlowingSphere position={[0.5, 2, -1.5]} color="#e4d5b7" speed={1.8} size={0.4} />
+      <GlowingSphere position={[-1.5, -1.5, -0.5]} color="#9e6b6b" speed={1.0} size={0.5} />
+      <GlowingSphere position={[1.8, 1.5, -3]} color="#c9a96e" speed={2.0} size={0.7} />
 
-      {/* Decorative rings */}
-      <FloatingRing position={[-2, 0, -1]} color="#c9a96e" scale={0.6} />
-      <FloatingRing position={[2.5, 1, -2]} color="#d4a0a0" scale={0.4} />
-
-      <LeafParticles />
-      <Environment preset="night" />
+      <GoldParticles />
+      <Environment preset="studio" />
     </>
   );
 }
@@ -129,7 +101,7 @@ export default function HeroScene() {
   return (
     <div className="absolute inset-0 z-0">
       <Canvas
-        camera={{ position: [0, 0, 6], fov: 42 }}
+        camera={{ position: [0, 0, 5], fov: 45 }}
         dpr={[1, 1.5]}
         gl={{ antialias: true, alpha: true }}
         style={{ background: "transparent" }}

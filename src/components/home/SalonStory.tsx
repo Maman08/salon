@@ -46,7 +46,7 @@ export default function SalonStory() {
                 <p className="text-3xl font-[family-name:var(--font-playfair)] text-gradient-gold mb-1">
                   8+
                 </p>
-                <p className="text-xs text-white/40 tracking-wider">
+                <p className="text-xs text-white/50 tracking-wider">
                   Years of crafting beauty experiences
                 </p>
               </motion.div>

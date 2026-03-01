@@ -1,8 +1,7 @@
 @import "tailwindcss";
 
 /* ============================================
-   UNIQUE VIBE GRENIX — Dark Luxury
-   Elegant • Warm Gold • Soft Rose • Premium
+   UNIQUE VIBE GRENIX — Global Design System
    ============================================ */
 
 @theme inline {
@@ -10,16 +9,15 @@
   --color-foreground: #f5f0eb;
   --color-gold: #c9a96e;
   --color-gold-light: #e4d5b7;
-  --color-gold-dark: #a88b4a;
+  --color-gold-dark: #8b6914;
   --color-rose: #d4a0a0;
-  --color-rose-light: #e8bfbf;
-  --color-rose-dark: #b07878;
+  --color-rose-light: #f0d4d4;
+  --color-rose-dark: #9e6b6b;
   --color-cream: #f5f0eb;
-  --color-cream-dark: #e8e0d6;
-  --color-surface: #111111;
-  --color-surface-light: #181818;
-  --color-surface-lighter: #222222;
-  --color-muted: #888888;
+  --color-cream-dark: #e8ddd3;
+  --color-charcoal: #1a1a1a;
+  --color-charcoal-light: #2a2a2a;
+  --color-charcoal-lighter: #3a3a3a;
   --font-sans: var(--font-inter);
   --font-serif: var(--font-playfair);
 }
@@ -50,29 +48,29 @@ body {
   background: #0a0a0a;
 }
 ::-webkit-scrollbar-thumb {
-  background: rgba(201, 169, 110, 0.25);
+  background: rgba(201, 169, 110, 0.4);
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: rgba(201, 169, 110, 0.5);
+  background: rgba(201, 169, 110, 0.7);
 }
 
-/* Glass morphism — dark */
+/* Glass morphism utility */
 .glass {
-  background: rgba(17, 17, 17, 0.7);
+  background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  border: 1px solid rgba(255, 255, 255, 0.06);
+  border: 1px solid rgba(255, 255, 255, 0.05);
 }
 
 .glass-gold {
-  background: rgba(17, 17, 17, 0.8);
+  background: rgba(201, 169, 110, 0.05);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(201, 169, 110, 0.15);
 }
 
-/* Text gradient — gold */
+/* Text gradient */
 .text-gradient-gold {
   background: linear-gradient(135deg, #c9a96e 0%, #e4d5b7 50%, #c9a96e 100%);
   -webkit-background-clip: text;
@@ -80,9 +78,8 @@ body {
   background-clip: text;
 }
 
-/* Text gradient — rose */
 .text-gradient-rose {
-  background: linear-gradient(135deg, #d4a0a0 0%, #e8bfbf 50%, #d4a0a0 100%);
+  background: linear-gradient(135deg, #d4a0a0 0%, #f0d4d4 50%, #d4a0a0 100%);
   -webkit-background-clip: text;
   -webkit-text-fill-color: transparent;
   background-clip: text;
@@ -90,11 +87,11 @@ body {
 
 /* Glow effects */
 .glow-gold {
-  box-shadow: 0 4px 30px rgba(201, 169, 110, 0.12), 0 0 60px rgba(201, 169, 110, 0.05);
+  box-shadow: 0 0 20px rgba(201, 169, 110, 0.15), 0 0 60px rgba(201, 169, 110, 0.05);
 }
 
 .glow-rose {
-  box-shadow: 0 4px 30px rgba(212, 160, 160, 0.12), 0 0 60px rgba(212, 160, 160, 0.05);
+  box-shadow: 0 0 20px rgba(212, 160, 160, 0.15), 0 0 60px rgba(212, 160, 160, 0.05);
 }
 
 /* Noise texture overlay */
@@ -108,7 +105,7 @@ body {
   background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.03'/%3E%3C/svg%3E");
   pointer-events: none;
   z-index: 9999;
-  opacity: 0.3;
+  opacity: 0.4;
 }
 
 /* Animated border gradient */
@@ -118,7 +115,7 @@ body {
 }
 
 .border-gradient {
-  background: linear-gradient(90deg, rgba(201,169,110,0.2), rgba(212,160,160,0.2), rgba(201,169,110,0.2));
+  background: linear-gradient(90deg, rgba(201,169,110,0.3), rgba(212,160,160,0.3), rgba(201,169,110,0.3));
   background-size: 200% 200%;
   animation: border-flow 4s ease infinite;
 }
@@ -140,7 +137,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.06), transparent);
+  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.08), transparent);
   animation: shimmer 3s ease-in-out infinite;
 }
 
@@ -157,24 +154,12 @@ body {
 
 /* Pulse glow */
 @keyframes pulse-glow {
-  0%, 100% { box-shadow: 0 4px 20px rgba(201, 169, 110, 0.08); }
-  50% { box-shadow: 0 4px 40px rgba(201, 169, 110, 0.2); }
+  0%, 100% { box-shadow: 0 0 20px rgba(201, 169, 110, 0.1); }
+  50% { box-shadow: 0 0 40px rgba(201, 169, 110, 0.25); }
 }
 
 .animate-pulse-glow {
   animation: pulse-glow 3s ease-in-out infinite;
-}
-
-/* Organic blob shape */
-@keyframes morph {
-  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
-  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
-  50% { border-radius: 50% 60% 30% 60% / 30% 60% 70% 40%; }
-  75% { border-radius: 60% 40% 60% 30% / 70% 30% 50% 60%; }
-}
-
-.animate-morph {
-  animation: morph 8s ease-in-out infinite;
 }
 
 /* Smooth image loading */
@@ -187,18 +172,6 @@ img {
   transition: transform 0.5s cubic-bezier(0.23, 1, 0.32, 1), box-shadow 0.5s cubic-bezier(0.23, 1, 0.32, 1);
 }
 .product-card:hover {
-  transform: translateY(-6px);
-  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.4);
-}
-
-/* Organic divider */
-.organic-divider {
-  height: 2px;
-  background: linear-gradient(90deg, transparent, rgba(201,169,110,0.3), rgba(212,160,160,0.2), transparent);
-}
-
-/* Luxury pattern background */
-.bg-botanical {
-  background-image: radial-gradient(circle at 20% 50%, rgba(201,169,110,0.04) 0%, transparent 50%),
-    radial-gradient(circle at 80% 50%, rgba(212,160,160,0.04) 0%, transparent 50%);
+  transform: translateY(-8px);
+  box-shadow: 0 20px 60px rgba(201, 169, 110, 0.1);
 }
