@@ -67,7 +67,7 @@ export default function ShopPage() {
             <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl lg:text-6xl mb-4">
               The <span className="text-gradient-gold">Shop</span>
             </h1>
-            <p className="text-white/40 max-w-lg mx-auto">
+            <p className="text-[var(--fg-muted)] max-w-lg mx-auto">
               Professional salon-grade beauty products, handpicked and tested by
               our experts. Find your perfect beauty ritual.
             </p>
@@ -86,7 +86,7 @@ export default function ShopPage() {
                 className={`flex items-center gap-2 px-4 py-2 rounded-full text-sm whitespace-nowrap transition-all duration-300 ${
                   activeCategory === cat.id
                     ? "bg-gold/20 text-gold border border-gold/30"
-                    : "bg-white/[0.03] text-white/40 border border-white/5 hover:border-white/10 hover:text-white/60"
+                    : "bg-[var(--glass)] text-[var(--fg-muted)] border border-[var(--border)] hover:border-[var(--border-mid)] hover:text-[var(--fg)]"
                 }`}
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
@@ -99,10 +99,10 @@ export default function ShopPage() {
         </Reveal>
 
         {/* Toolbar */}
-        <div className="flex items-center justify-between mb-8 pb-6 border-b border-white/5">
-          <p className="text-sm text-white/30">
+        <div className="flex items-center justify-between mb-8 pb-6 border-b border-[var(--border)]">
+          <p className="text-sm text-[var(--fg-faint)]">
             Showing{" "}
-            <span className="text-white/60">{filteredProducts.length}</span>{" "}
+            <span className="text-[var(--fg-muted)]">{filteredProducts.length}</span>{" "}
             products
           </p>
 
@@ -112,19 +112,19 @@ export default function ShopPage() {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none bg-white/[0.03] border border-white/5 rounded-lg px-4 py-2 pr-8 text-sm text-white/60 outline-none focus:border-gold/30 transition-colors cursor-pointer"
+                className="appearance-none bg-[var(--glass)] border border-[var(--border)] rounded-lg px-4 py-2 pr-8 text-sm text-[var(--fg-muted)] outline-none focus:border-gold/30 transition-colors cursor-pointer"
               >
                 {sortOptions.map((opt) => (
                   <option
                     key={opt.value}
                     value={opt.value}
-                    className="bg-[#1a1a1a]"
+                    className="bg-[var(--bg-card)]"
                   >
                     {opt.label}
                   </option>
                 ))}
               </select>
-              <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-white/30 pointer-events-none" />
+              <ChevronDown className="absolute right-2 top-1/2 -translate-y-1/2 w-4 h-4 text-[var(--fg-faint)] pointer-events-none" />
             </div>
 
             {/* Filter button */}
@@ -135,7 +135,7 @@ export default function ShopPage() {
               className={`flex items-center gap-2 px-4 py-2 rounded-lg text-sm transition-all duration-300 ${
                 showFilters
                   ? "bg-gold/10 text-gold border border-gold/30"
-                  : "bg-white/[0.03] text-white/60 border border-white/5"
+                  : "bg-[var(--glass)] text-[var(--fg-muted)] border border-[var(--border)]"
               }`}
             >
               {showFilters ? <X className="w-4 h-4" /> : <SlidersHorizontal className="w-4 h-4" />}
@@ -154,11 +154,11 @@ export default function ShopPage() {
               transition={{ duration: 0.3 }}
               className="overflow-hidden mb-8"
             >
-              <div className="p-6 rounded-2xl bg-white/[0.02] border border-white/5">
+              <div className="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
                 <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
                   {/* Price range */}
                   <div>
-                    <label className="text-xs tracking-wider uppercase text-white/40 mb-3 block">
+                    <label className="text-xs tracking-wider uppercase text-[var(--fg-muted)] mb-3 block">
                       Price Range
                     </label>
                     <div className="flex items-center gap-3">
@@ -168,17 +168,17 @@ export default function ShopPage() {
                         onChange={(e) =>
                           setPriceRange([Number(e.target.value), priceRange[1]])
                         }
-                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-gold/30"
+                        className="w-full bg-[var(--bg-raised)] border border-[var(--border-mid)] rounded-lg px-3 py-2 text-sm text-[var(--fg)] outline-none focus:border-gold/30"
                         placeholder="Min"
                       />
-                      <span className="text-white/20">—</span>
+                      <span className="text-[var(--fg-faint)]">—</span>
                       <input
                         type="number"
                         value={priceRange[1]}
                         onChange={(e) =>
                           setPriceRange([priceRange[0], Number(e.target.value)])
                         }
-                        className="w-full bg-white/5 border border-white/10 rounded-lg px-3 py-2 text-sm outline-none focus:border-gold/30"
+                        className="w-full bg-[var(--bg-raised)] border border-[var(--border-mid)] rounded-lg px-3 py-2 text-sm text-[var(--fg)] outline-none focus:border-gold/30"
                         placeholder="Max"
                       />
                     </div>
@@ -186,7 +186,7 @@ export default function ShopPage() {
 
                   {/* Salon tested filter */}
                   <div>
-                    <label className="text-xs tracking-wider uppercase text-white/40 mb-3 block">
+                    <label className="text-xs tracking-wider uppercase text-[var(--fg-muted)] mb-3 block">
                       Quick Filters
                     </label>
                     <div className="flex flex-wrap gap-2">
@@ -194,7 +194,7 @@ export default function ShopPage() {
                         (filter) => (
                           <button
                             key={filter}
-                            className="px-3 py-1.5 rounded-full text-xs bg-white/5 text-white/40 border border-white/5 hover:border-gold/20 hover:text-gold/70 transition-all"
+                            className="px-3 py-1.5 rounded-full text-xs bg-[var(--glass)] text-[var(--fg-muted)] border border-[var(--border)] hover:border-gold/20 hover:text-gold/70 transition-all"
                           >
                             {filter}
                           </button>
@@ -228,8 +228,8 @@ export default function ShopPage() {
         {filteredProducts.length === 0 && (
           <div className="text-center py-20">
             <p className="text-4xl mb-4">🔍</p>
-            <p className="text-white/40 text-lg">No products found</p>
-            <p className="text-white/20 text-sm mt-2">
+            <p className="text-[var(--fg-muted)] text-lg">No products found</p>
+            <p className="text-[var(--fg-faint)] text-sm mt-2">
               Try adjusting your filters
             </p>
             <button

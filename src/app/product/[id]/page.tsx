@@ -70,19 +70,19 @@ export default function ProductDetailPage() {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Breadcrumb */}
         <Reveal>
-          <nav className="flex items-center gap-2 text-xs text-white/30 mb-8">
-            <Link href="/" className="hover:text-white/60 transition-colors">Home</Link>
+          <nav className="flex items-center gap-2 text-xs text-[var(--fg-faint)] mb-8">
+            <Link href="/" className="hover:text-[var(--fg-muted)] transition-colors">Home</Link>
             <span>/</span>
-            <Link href="/shop" className="hover:text-white/60 transition-colors">Shop</Link>
+            <Link href="/shop" className="hover:text-[var(--fg-muted)] transition-colors">Shop</Link>
             <span>/</span>
-            <span className="text-white/50">{product.name}</span>
+            <span className="text-[var(--fg-muted)]">{product.name}</span>
           </nav>
         </Reveal>
 
         {/* Back button (mobile) */}
         <Link
           href="/shop"
-          className="lg:hidden inline-flex items-center gap-2 text-sm text-white/40 hover:text-white/60 mb-6 transition-colors"
+          className="lg:hidden inline-flex items-center gap-2 text-sm text-[var(--fg-muted)] hover:text-[var(--fg)] mb-6 transition-colors"
         >
           <ArrowLeft className="w-4 h-4" />
           Back
@@ -95,7 +95,7 @@ export default function ProductDetailPage() {
             <div className="space-y-4">
               {/* Main image */}
               <motion.div
-                className="relative aspect-square rounded-2xl overflow-hidden bg-[#111]"
+                className="relative aspect-square rounded-2xl overflow-hidden bg-[var(--bg-card)]"
                 layoutId={`product-image-${product.id}`}
               >
                 <AnimatePresence mode="wait">
@@ -121,7 +121,7 @@ export default function ProductDetailPage() {
                 {/* Badges */}
                 <div className="absolute top-4 left-4 flex flex-col gap-2 z-10">
                   {product.badge && (
-                    <span className="px-3 py-1 text-xs tracking-wider uppercase font-semibold bg-gold/90 text-[#0a0a0a] rounded-full">
+                    <span className="px-3 py-1 text-xs tracking-wider uppercase font-semibold bg-gold/90 text-[var(--btn-text)] rounded-full">
                       {product.badge}
                     </span>
                   )}
@@ -131,7 +131,7 @@ export default function ProductDetailPage() {
                     </span>
                   )}
                   {product.usedInSalon && (
-                    <span className="px-3 py-1 text-xs tracking-wider bg-white/10 backdrop-blur-md text-white/70 rounded-full border border-white/10">
+                    <span className="px-3 py-1 text-xs tracking-wider bg-[var(--glass)] backdrop-blur-md text-[var(--fg-muted)] rounded-full border border-[var(--border-mid)]">
                       ✨ Used in Salon
                     </span>
                   )}
@@ -156,7 +156,7 @@ export default function ProductDetailPage() {
                       className={`relative w-20 h-20 rounded-xl overflow-hidden border-2 transition-all duration-300 ${
                         activeImage === i
                           ? "border-gold/50 shadow-lg shadow-gold/10"
-                          : "border-white/5 hover:border-white/20"
+                          : "border-[var(--border)] hover:border-[var(--border-mid)]"
                       }`}
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
@@ -198,12 +198,12 @@ export default function ProductDetailPage() {
                         className={`w-4 h-4 ${
                           i < Math.floor(product.rating)
                             ? "text-gold fill-gold"
-                            : "text-white/10"
+                            : "text-[var(--fg-faint)]"
                         }`}
                       />
                     ))}
                   </div>
-                  <span className="text-sm text-white/40">
+                  <span className="text-sm text-[var(--fg-muted)]">
                     {product.rating} ({product.reviews} reviews)
                   </span>
                 </div>
@@ -215,7 +215,7 @@ export default function ProductDetailPage() {
                   </span>
                   {product.originalPrice && (
                     <>
-                      <span className="text-lg text-white/20 line-through">
+                      <span className="text-lg text-[var(--fg-faint)] line-through">
                         ₹{product.originalPrice.toLocaleString()}
                       </span>
                       <span className="px-2 py-0.5 text-xs font-semibold bg-rose/10 text-rose rounded-md">
@@ -226,22 +226,22 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Short description */}
-                <p className="text-white/50 leading-relaxed">
+                <p className="text-[var(--fg-muted)] leading-relaxed">
                   {product.shortDescription}
                 </p>
 
                 {/* Divider */}
-                <div className="w-full h-[1px] bg-gradient-to-r from-white/5 via-white/10 to-white/5" />
+                <div className="w-full h-[1px] bg-gradient-to-r from-[var(--border)] via-[var(--border-mid)] to-[var(--border)]" />
 
                 {/* Quantity & Add to Cart */}
                 <div className="flex items-center gap-4">
                   {/* Quantity */}
-                  <div className="flex items-center gap-3 p-1 rounded-xl bg-white/[0.03] border border-white/5">
+                  <div className="flex items-center gap-3 p-1 rounded-xl bg-[var(--glass)] border border-[var(--border)]">
                     <motion.button
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       onClick={() => setQuantity(Math.max(1, quantity - 1))}
-                      className="w-10 h-10 rounded-lg flex items-center justify-center text-white/40 hover:text-white hover:bg-white/5 transition-all"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--bg-raised)] transition-all"
                     >
                       <Minus className="w-4 h-4" />
                     </motion.button>
@@ -250,7 +250,7 @@ export default function ProductDetailPage() {
                       whileHover={{ scale: 1.1 }}
                       whileTap={{ scale: 0.9 }}
                       onClick={() => setQuantity(quantity + 1)}
-                      className="w-10 h-10 rounded-lg flex items-center justify-center text-white/40 hover:text-white hover:bg-white/5 transition-all"
+                      className="w-10 h-10 rounded-lg flex items-center justify-center text-[var(--fg-muted)] hover:text-[var(--fg)] hover:bg-[var(--bg-raised)] transition-all"
                     >
                       <Plus className="w-4 h-4" />
                     </motion.button>
@@ -264,7 +264,7 @@ export default function ProductDetailPage() {
                     className={`flex-1 py-3.5 rounded-xl font-semibold text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 ${
                       addedToCart
                         ? "bg-green-500/20 text-green-400 border border-green-500/30"
-                        : "bg-gradient-to-r from-gold to-gold-light text-[#0a0a0a] hover:shadow-lg hover:shadow-gold/20"
+                        : "bg-gradient-to-r from-gold to-gold-light text-[var(--btn-text)] hover:shadow-lg hover:shadow-gold/20"
                     }`}
                   >
                     {addedToCart ? (
@@ -288,7 +288,7 @@ export default function ProductDetailPage() {
                     className={`w-12 h-12 rounded-xl border flex items-center justify-center transition-all duration-300 ${
                       isLiked
                         ? "bg-rose/10 border-rose/30 text-rose"
-                        : "border-white/10 text-white/40 hover:border-rose/20 hover:text-rose"
+                        : "border-[var(--border-mid)] text-[var(--fg-muted)] hover:border-rose/20 hover:text-rose"
                     }`}
                   >
                     <Heart className={`w-5 h-5 ${isLiked ? "fill-current" : ""}`} />
@@ -304,10 +304,10 @@ export default function ProductDetailPage() {
                   ].map(({ icon: Icon, text }) => (
                     <div
                       key={text}
-                      className="flex items-center gap-2 p-2.5 rounded-lg bg-white/[0.02] border border-white/5 text-center"
+                      className="flex items-center gap-2 p-2.5 rounded-lg bg-[var(--glass)] border border-[var(--border)] text-center"
                     >
                       <Icon className="w-3.5 h-3.5 text-gold/60 flex-shrink-0" />
-                      <span className="text-[10px] text-white/30 tracking-wider">
+                      <span className="text-[10px] text-[var(--fg-faint)] tracking-wider">
                         {text}
                       </span>
                     </div>
@@ -315,7 +315,7 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Tabs */}
-                <div className="border-t border-white/5 pt-6 mt-2">
+                <div className="border-t border-[var(--border)] pt-6 mt-2">
                   <div className="flex gap-6 mb-6">
                     {(["description", "ingredients", "reviews"] as const).map((tab) => (
                       <button
@@ -324,7 +324,7 @@ export default function ProductDetailPage() {
                         className={`text-sm tracking-wider capitalize pb-2 border-b-2 transition-all duration-300 ${
                           activeTab === tab
                             ? "text-gold border-gold"
-                            : "text-white/30 border-transparent hover:text-white/50"
+                            : "text-[var(--fg-faint)] border-transparent hover:text-[var(--fg-muted)]"
                         }`}
                       >
                         {tab}
@@ -341,7 +341,7 @@ export default function ProductDetailPage() {
                       transition={{ duration: 0.2 }}
                     >
                       {activeTab === "description" && (
-                        <p className="text-sm text-white/40 leading-relaxed">
+                        <p className="text-sm text-[var(--fg-muted)] leading-relaxed">
                           {product.description}
                         </p>
                       )}
@@ -351,14 +351,14 @@ export default function ProductDetailPage() {
                             product.ingredients.map((ing) => (
                               <div
                                 key={ing}
-                                className="flex items-center gap-2 text-sm text-white/40"
+                                className="flex items-center gap-2 text-sm text-[var(--fg-muted)]"
                               >
                                 <div className="w-1.5 h-1.5 rounded-full bg-gold/40" />
                                 {ing}
                               </div>
                             ))
                           ) : (
-                            <p className="text-sm text-white/30">
+                            <p className="text-sm text-[var(--fg-faint)]">
                               Ingredient list coming soon.
                             </p>
                           )}
@@ -366,7 +366,7 @@ export default function ProductDetailPage() {
                       )}
                       {activeTab === "reviews" && (
                         <div className="space-y-4">
-                          <div className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5">
+                          <div className="flex items-center gap-4 p-4 rounded-xl bg-[var(--glass)] border border-[var(--border)]">
                             <div className="text-center">
                               <p className="text-2xl font-[family-name:var(--font-playfair)] text-gold">
                                 {product.rating}
@@ -378,20 +378,20 @@ export default function ProductDetailPage() {
                                     className={`w-3 h-3 ${
                                       i < Math.floor(product.rating)
                                         ? "text-gold fill-gold"
-                                        : "text-white/10"
+                                        : "text-[var(--fg-faint)]"
                                     }`}
                                   />
                                 ))}
                               </div>
-                              <p className="text-xs text-white/30 mt-1">
+                              <p className="text-xs text-[var(--fg-faint)] mt-1">
                                 {product.reviews} reviews
                               </p>
                             </div>
                             <div className="flex-1 space-y-1.5">
                               {[5, 4, 3, 2, 1].map((star) => (
                                 <div key={star} className="flex items-center gap-2">
-                                  <span className="text-xs text-white/30 w-3">{star}</span>
-                                  <div className="flex-1 h-1.5 bg-white/5 rounded-full overflow-hidden">
+                                  <span className="text-xs text-[var(--fg-faint)] w-3">{star}</span>
+                                  <div className="flex-1 h-1.5 bg-[var(--bg-raised)] rounded-full overflow-hidden">
                                     <div
                                       className="h-full bg-gold/60 rounded-full"
                                       style={{
@@ -411,7 +411,7 @@ export default function ProductDetailPage() {
                               ))}
                             </div>
                           </div>
-                          <p className="text-xs text-white/20 text-center">
+                          <p className="text-xs text-[var(--fg-faint)] text-center">
                             Detailed reviews coming soon
                           </p>
                         </div>
@@ -434,7 +434,7 @@ export default function ProductDetailPage() {
                 </h2>
                 <Link
                   href="/shop"
-                  className="text-sm text-white/30 hover:text-gold transition-colors"
+                  className="text-sm text-[var(--fg-faint)] hover:text-gold transition-colors"
                 >
                   View All →
                 </Link>

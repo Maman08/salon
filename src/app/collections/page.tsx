@@ -59,7 +59,7 @@ export default function CollectionsPage() {
             <h1 className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl lg:text-6xl mb-4">
               Our <span className="text-gradient-rose">Collections</span>
             </h1>
-            <p className="text-white/40 max-w-lg mx-auto">
+            <p className="text-[var(--fg-muted)] max-w-lg mx-auto">
               Discover beauty sets curated around themes, rituals, and
               experiences. Each collection tells a story.
             </p>
@@ -85,19 +85,19 @@ export default function CollectionsPage() {
                     className="object-cover group-hover:scale-105 transition-transform duration-700"
                     sizes="100vw"
                   />
-                  <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/90 via-[#0a0a0a]/60 to-transparent" />
+                  <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg)]/90 via-[var(--bg)]/60 to-transparent" />
                   <div className={`absolute inset-0 bg-gradient-to-br ${collection.gradient} opacity-0 group-hover:opacity-60 transition-opacity duration-500`} />
                 </div>
 
                 <div className="absolute inset-0 flex items-center px-8 sm:px-12 lg:px-16">
                   <div className="max-w-lg">
-                    <p className="text-[10px] tracking-widest uppercase text-white/30 mb-2">
+                    <p className="text-[10px] tracking-widest uppercase text-[var(--fg-faint)] mb-2">
                       {collection.products} Products
                     </p>
-                    <h2 className="font-[family-name:var(--font-playfair)] text-2xl sm:text-3xl lg:text-4xl mb-3">
+                    <h2 className="font-[family-name:var(--font-playfair)] text-2xl sm:text-3xl lg:text-4xl mb-3 text-[var(--fg)]">
                       {collection.name}
                     </h2>
-                    <p className="text-sm text-white/40 leading-relaxed mb-6 max-w-md hidden sm:block">
+                    <p className="text-sm text-[var(--fg-muted)] leading-relaxed mb-6 max-w-md hidden sm:block">
                       {collection.description}
                     </p>
                     <div className="flex items-center gap-2 text-sm text-gold group-hover:gap-3 transition-all duration-300">

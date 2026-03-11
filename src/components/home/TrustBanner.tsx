@@ -7,8 +7,8 @@ import { Truck, Shield, RotateCcw, Headphones, Sparkles, Award } from "lucide-re
 const features = [
   {
     icon: Sparkles,
-    title: "Salon Tested",
-    description: "Every product is tested and used daily in our professional salon",
+    title: "Pro Formulated",
+    description: "Every product is crafted with professional-grade ingredients and formulations",
     color: "#c9a96e",
   },
   {
@@ -46,7 +46,7 @@ const features = [
 export default function TrustBanner() {
   return (
     <section className="relative py-20 lg:py-28 overflow-hidden">
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d0b08] to-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-[var(--bg-raised)] to-[var(--bg)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         <Reveal>
@@ -64,7 +64,7 @@ export default function TrustBanner() {
           {features.map((feature, i) => (
             <Reveal key={feature.title} delay={i * 0.08}>
               <motion.div
-                className="group relative p-6 lg:p-8 rounded-2xl bg-white/[0.02] border border-white/5 hover:border-white/10 text-center transition-all duration-500"
+                className="group relative p-6 lg:p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-mid)] text-center transition-all duration-500"
                 whileHover={{ y: -4, scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
@@ -82,7 +82,7 @@ export default function TrustBanner() {
                 <h3 className="text-sm font-semibold mb-1.5 tracking-wide">
                   {feature.title}
                 </h3>
-                <p className="text-xs text-white/30 leading-relaxed">
+                <p className="text-xs text-[var(--fg-muted)] opacity-50 leading-relaxed">
                   {feature.description}
                 </p>
 

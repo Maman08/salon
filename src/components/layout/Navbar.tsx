@@ -14,12 +14,13 @@ import {
 } from "lucide-react";
 import { useCart } from "@/components/cart/CartProvider";
 import CartDrawer from "@/components/cart/CartDrawer";
+import ThemeToggle from "@/components/ui/ThemeToggle";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
   { href: "/collections", label: "Collections" },
-  { href: "/salon", label: "Salon Looks" },
+  { href: "/lookbook", label: "Lookbook" },
   { href: "/about", label: "Our Story" },
 ];
 
@@ -40,7 +41,7 @@ export default function Navbar() {
       <motion.header
         className={`fixed top-0 left-0 right-0 z-[100] transition-all duration-500 ${
           scrolled
-            ? "bg-[#0a0a0a]/80 backdrop-blur-xl border-b border-white/5"
+            ? "bg-[var(--bg)]/80 backdrop-blur-xl border-b border-[var(--border)]"
             : "bg-transparent"
         }`}
         initial={{ y: -100 }}
@@ -72,7 +73,7 @@ export default function Navbar() {
           <div className="flex items-center justify-between h-16 lg:h-20">
             {/* Mobile menu button */}
             <button
-              className="lg:hidden p-2 -ml-2"
+              className="lg:hidden p-2 -ml-2 text-[var(--fg-muted)] hover:text-[var(--fg)]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
               {mobileMenuOpen ? (
@@ -82,13 +83,13 @@ export default function Navbar() {
               )}
             </button>
 
-            {/* Nav links - desktop */}
+            {/* Nav links - desktop left */}
             <div className="hidden lg:flex items-center gap-8">
               {navLinks.slice(0, 3).map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="relative text-sm tracking-wider uppercase text-white/60 hover:text-white transition-colors duration-300 group"
+                  className="relative text-sm tracking-wider uppercase text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors duration-300 group"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-gold to-rose group-hover:w-full transition-all duration-300" />
@@ -106,10 +107,9 @@ export default function Navbar() {
                 <h1 className="font-[family-name:var(--font-playfair)] text-lg sm:text-xl lg:text-2xl font-bold tracking-wider">
                   <span className="text-gradient-gold">UNIQUE VIBE</span>
                 </h1>
-                <p className="text-[9px] sm:text-[10px] tracking-[0.35em] uppercase text-center text-white/40 -mt-0.5">
+                <p className="text-[9px] sm:text-[10px] tracking-[0.35em] uppercase text-center text-[var(--fg-faint)] -mt-0.5">
                   Grenix
                 </p>
-                {/* Decorative line */}
                 <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
               </motion.div>
             </Link>
@@ -120,7 +120,7 @@ export default function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="relative text-sm tracking-wider uppercase text-white/60 hover:text-white transition-colors duration-300 group"
+                  className="relative text-sm tracking-wider uppercase text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors duration-300 group"
                 >
                   {link.label}
                   <span className="absolute -bottom-1 left-0 w-0 h-[1px] bg-gradient-to-r from-gold to-rose group-hover:w-full transition-all duration-300" />
@@ -129,31 +129,33 @@ export default function Navbar() {
             </div>
 
             {/* Action icons */}
-            <div className="flex items-center gap-3 sm:gap-4">
+            <div className="flex items-center gap-2 sm:gap-3">
+              <ThemeToggle />
+
               <button
                 onClick={() => setSearchOpen(true)}
-                className="p-2 text-white/60 hover:text-gold transition-colors duration-300"
+                className="p-2 text-[var(--fg-muted)] hover:text-gold transition-colors duration-300"
               >
                 <Search className="w-[18px] h-[18px]" />
               </button>
 
               <Link
                 href="/wishlist"
-                className="hidden sm:block p-2 text-white/60 hover:text-rose transition-colors duration-300"
+                className="hidden sm:block p-2 text-[var(--fg-muted)] hover:text-rose transition-colors duration-300"
               >
                 <Heart className="w-[18px] h-[18px]" />
               </Link>
 
               <Link
                 href="/account"
-                className="hidden sm:block p-2 text-white/60 hover:text-white transition-colors duration-300"
+                className="hidden sm:block p-2 text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors duration-300"
               >
                 <User className="w-[18px] h-[18px]" />
               </Link>
 
               <button
                 onClick={() => setIsOpen(true)}
-                className="relative p-2 text-white/60 hover:text-gold transition-colors duration-300"
+                className="relative p-2 text-[var(--fg-muted)] hover:text-gold transition-colors duration-300"
               >
                 <ShoppingBag className="w-[18px] h-[18px]" />
                 <AnimatePresence>
@@ -162,7 +164,7 @@ export default function Navbar() {
                       initial={{ scale: 0 }}
                       animate={{ scale: 1 }}
                       exit={{ scale: 0 }}
-                      className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-gold text-[#0a0a0a] text-[10px] font-bold rounded-full flex items-center justify-center"
+                      className="absolute -top-0.5 -right-0.5 w-4 h-4 bg-gold text-[var(--btn-text)] text-[10px] font-bold rounded-full flex items-center justify-center"
                     >
                       {totalItems}
                     </motion.span>
@@ -178,7 +180,7 @@ export default function Navbar() {
       <AnimatePresence>
         {searchOpen && (
           <motion.div
-            className="fixed inset-0 z-[200] bg-[#0a0a0a]/95 backdrop-blur-xl flex items-start justify-center pt-32"
+            className="fixed inset-0 z-[200] bg-[var(--bg)]/95 backdrop-blur-xl flex items-start justify-center pt-32"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -197,11 +199,11 @@ export default function Navbar() {
                 <input
                   type="text"
                   placeholder="Search products, categories..."
-                  className="w-full bg-transparent border-b-2 border-gold/20 focus:border-gold/60 outline-none py-4 pl-10 pr-4 text-2xl font-light text-white placeholder:text-white/20 transition-colors duration-300"
+                  className="w-full bg-transparent border-b-2 border-gold/20 focus:border-gold/60 outline-none py-4 pl-10 pr-4 text-2xl font-light text-[var(--fg)] placeholder:text-[var(--fg-faint)] transition-colors duration-300"
                   autoFocus
                 />
               </div>
-              <p className="text-white/30 text-sm mt-4">
+              <p className="text-[var(--fg-faint)] text-sm mt-4">
                 Try: &quot;Rose Serum&quot;, &quot;Hair Oil&quot;, &quot;Lipstick&quot;
               </p>
             </motion.div>
@@ -213,7 +215,7 @@ export default function Navbar() {
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
-            className="fixed inset-0 z-[150] bg-[#0a0a0a]/98 backdrop-blur-xl lg:hidden"
+            className="fixed inset-0 z-[150] bg-[var(--bg)]/98 backdrop-blur-xl lg:hidden"
             initial={{ opacity: 0, x: -100 }}
             animate={{ opacity: 1, x: 0 }}
             exit={{ opacity: 0, x: -100 }}
@@ -229,7 +231,7 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.href}
-                    className="text-2xl font-[family-name:var(--font-playfair)] tracking-wider text-white/70 hover:text-gold transition-colors duration-300"
+                    className="text-2xl font-[family-name:var(--font-playfair)] tracking-wider text-[var(--fg-muted)] hover:text-gold transition-colors duration-300"
                     onClick={() => setMobileMenuOpen(false)}
                   >
                     {link.label}
@@ -248,18 +250,19 @@ export default function Navbar() {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
-                className="flex gap-6 mt-4"
+                className="flex items-center gap-6 mt-4"
               >
+                <ThemeToggle />
                 <Link
                   href="/wishlist"
-                  className="text-white/40 hover:text-rose transition-colors"
+                  className="text-[var(--fg-faint)] hover:text-rose transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <Heart className="w-5 h-5" />
                 </Link>
                 <Link
                   href="/account"
-                  className="text-white/40 hover:text-white transition-colors"
+                  className="text-[var(--fg-faint)] hover:text-[var(--fg)] transition-colors"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   <User className="w-5 h-5" />

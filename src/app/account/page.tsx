@@ -27,7 +27,7 @@ export default function AccountPage() {
             <h1 className="font-[family-name:var(--font-playfair)] text-3xl lg:text-4xl mb-2">
               My <span className="text-gradient-gold">Account</span>
             </h1>
-            <p className="text-white/40 text-sm">
+            <p className="text-[var(--fg-muted)] text-sm">
               Sign in to manage your orders and preferences
             </p>
           </div>
@@ -35,27 +35,27 @@ export default function AccountPage() {
 
         {/* Sign in card */}
         <Reveal delay={0.1}>
-          <div className="p-8 rounded-2xl bg-white/[0.02] border border-white/5 mb-8">
+          <div className="p-8 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] mb-8">
             <div className="space-y-4">
               <input
                 type="email"
                 placeholder="Email address"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-gold/40 transition-colors placeholder:text-white/20"
+                className="w-full bg-[var(--bg-raised)] border border-[var(--border-mid)] rounded-xl px-4 py-3 text-sm text-[var(--fg)] outline-none focus:border-gold/40 transition-colors placeholder:text-[var(--fg-faint)]"
               />
               <input
                 type="password"
                 placeholder="Password"
-                className="w-full bg-white/5 border border-white/10 rounded-xl px-4 py-3 text-sm outline-none focus:border-gold/40 transition-colors placeholder:text-white/20"
+                className="w-full bg-[var(--bg-raised)] border border-[var(--border-mid)] rounded-xl px-4 py-3 text-sm text-[var(--fg)] outline-none focus:border-gold/40 transition-colors placeholder:text-[var(--fg-faint)]"
               />
               <motion.button
                 whileHover={{ scale: 1.01 }}
                 whileTap={{ scale: 0.99 }}
-                className="w-full py-3.5 bg-gradient-to-r from-gold to-gold-light text-[#0a0a0a] font-semibold text-sm tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-gold/20 transition-shadow"
+                className="w-full py-3.5 bg-gradient-to-r from-gold to-gold-light text-[var(--btn-text)] font-semibold text-sm tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 hover:shadow-lg hover:shadow-gold/20 transition-shadow"
               >
                 <LogIn className="w-4 h-4" />
                 Sign In
               </motion.button>
-              <p className="text-xs text-center text-white/20">
+              <p className="text-xs text-center text-[var(--fg-faint)]">
                 Don&apos;t have an account?{" "}
                 <span className="text-gold cursor-pointer hover:underline">
                   Create one
@@ -71,7 +71,7 @@ export default function AccountPage() {
             <Reveal key={item.label} delay={0.2 + i * 0.08}>
               <Link href={item.href}>
                 <motion.div
-                  className="flex items-center gap-4 p-4 rounded-xl bg-white/[0.02] border border-white/5 hover:border-white/10 transition-all duration-300 group"
+                  className="flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-mid)] transition-all duration-300 group"
                   whileHover={{ x: 4 }}
                 >
                   <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform">
@@ -79,7 +79,7 @@ export default function AccountPage() {
                   </div>
                   <div>
                     <p className="text-sm font-medium">{item.label}</p>
-                    <p className="text-xs text-white/30">{item.description}</p>
+                    <p className="text-xs text-[var(--fg-faint)]">{item.description}</p>
                   </div>
                 </motion.div>
               </Link>

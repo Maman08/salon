@@ -13,9 +13,9 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
 
   return (
     <Reveal delay={index * 0.1} className="group">
-      <div className="product-card relative rounded-2xl overflow-hidden bg-white/[0.02] border border-white/5 hover:border-gold/20">
+      <div className="product-card relative rounded-2xl overflow-hidden bg-[var(--bg-card)] border border-[var(--border)] hover:border-gold/20">
         {/* Image container */}
-        <div className="relative aspect-square overflow-hidden bg-gradient-to-br from-white/[0.03] to-transparent">
+        <div className="relative aspect-square overflow-hidden bg-[var(--bg-raised)]">
           <Image
             src={product.image}
             alt={product.name}
@@ -25,18 +25,18 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           />
 
           {/* Overlay on hover */}
-          <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)]/80 via-transparent to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
 
           {/* Badge */}
           {product.badge && (
-            <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold/90 text-[#0a0a0a] text-[10px] font-bold tracking-wider uppercase">
+            <div className="absolute top-3 left-3 px-3 py-1 rounded-full bg-gold/90 text-[var(--btn-text)] text-[10px] font-bold tracking-wider uppercase">
               {product.badge}
             </div>
           )}
 
           {/* Salon badge */}
           {product.usedInSalon && (
-            <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-white/10 backdrop-blur-md text-[10px] tracking-wider text-white/70">
+            <div className="absolute top-3 right-3 px-2 py-1 rounded-full bg-[var(--glass)] backdrop-blur-md text-[10px] tracking-wider text-[var(--fg-muted)]">
               ✨ Used in Salon
             </div>
           )}
@@ -47,7 +47,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
               onClick={() => addItem(product)}
-              className="flex-1 py-2.5 bg-gold/90 hover:bg-gold text-[#0a0a0a] text-xs font-bold tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 transition-colors"
+              className="flex-1 py-2.5 bg-gold/90 hover:bg-gold text-[var(--btn-text)] text-xs font-bold tracking-wider uppercase rounded-xl flex items-center justify-center gap-2 transition-colors"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               Add to Bag
@@ -55,7 +55,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
-              className="p-2.5 bg-white/10 backdrop-blur-md rounded-xl hover:bg-white/20 transition-colors"
+              className="p-2.5 bg-[var(--glass)] backdrop-blur-md rounded-xl hover:bg-[var(--bg-raised)] transition-colors"
             >
               <Heart className="w-4 h-4" />
             </motion.button>
@@ -63,7 +63,7 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2.5 bg-white/10 backdrop-blur-md rounded-xl hover:bg-white/20 transition-colors"
+                className="p-2.5 bg-[var(--glass)] backdrop-blur-md rounded-xl hover:bg-[var(--bg-raised)] transition-colors"
               >
                 <Eye className="w-4 h-4" />
               </motion.div>
@@ -77,11 +77,11 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
             {product.brand}
           </p>
           <Link href={`/product/${product.id}`}>
-            <h3 className="text-sm font-medium text-white/80 group-hover:text-white transition-colors line-clamp-1">
+            <h3 className="text-sm font-medium text-[var(--fg-muted)] group-hover:text-[var(--fg)] transition-colors line-clamp-1">
               {product.name}
             </h3>
           </Link>
-          <p className="text-xs text-white/30 mt-1 line-clamp-1">
+          <p className="text-xs text-[var(--fg-faint)] mt-1 line-clamp-1">
             {product.shortDescription}
           </p>
 
@@ -89,14 +89,14 @@ function ProductCard({ product, index }: { product: Product; index: number }) {
           <div className="flex items-center justify-between mt-3">
             <div className="flex items-center gap-1">
               <Star className="w-3 h-3 fill-gold text-gold" />
-              <span className="text-xs text-white/50">{product.rating}</span>
-              <span className="text-xs text-white/20">
+              <span className="text-xs text-[var(--fg-muted)]">{product.rating}</span>
+              <span className="text-xs text-[var(--fg-faint)]">
                 ({product.reviews})
               </span>
             </div>
             <div className="flex items-center gap-2">
               {product.originalPrice && (
-                <span className="text-xs text-white/20 line-through">
+                <span className="text-xs text-[var(--fg-faint)] line-through">
                   ₹{product.originalPrice.toLocaleString()}
                 </span>
               )}

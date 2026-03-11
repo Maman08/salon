@@ -11,7 +11,7 @@ const testimonials = [
     role: "Loyal Client • 3 years",
     avatar: "PS",
     rating: 5,
-    text: "The Rose Serum changed my skin completely. I've been getting it from the salon for years, and now I can reorder online! The quality is exactly the same — pure luxury.",
+    text: "The Rose Serum completely transformed my skin. I discovered it through a recommendation and I've been reordering ever since. The quality is absolutely stunning — pure luxury in a bottle.",
     product: "Luminous Rose Serum",
     color: "#d4a0a0",
   },
@@ -29,7 +29,7 @@ const testimonials = [
     role: "Beauty Enthusiast",
     avatar: "AP",
     rating: 5,
-    text: "Finally, a beauty brand that feels authentic! You can tell these products are salon-tested. The Midnight Oud is now my signature scent. Get compliments every time.",
+    text: "Finally, a beauty brand that feels truly authentic! You can tell these products are expertly formulated. The Midnight Oud is now my signature scent. I get compliments every single time.",
     product: "Midnight Oud Perfume",
     color: "#9e6b6b",
   },
@@ -83,8 +83,8 @@ export default function TestimonialsSection() {
               <motion.div
                 className={`relative p-6 lg:p-8 rounded-2xl border transition-all duration-500 cursor-pointer ${
                   activeIndex === i
-                    ? "bg-white/[0.04] border-gold/20 shadow-lg shadow-gold/5"
-                    : "bg-white/[0.01] border-white/5 hover:border-white/10"
+                    ? "bg-[var(--bg-card)] border-gold/20 shadow-lg shadow-gold/5"
+                    : "bg-[var(--bg-card)] border-[var(--border)] hover:border-[var(--border-mid)]"
                 }`}
                 onMouseEnter={() => setActiveIndex(i)}
                 whileHover={{ y: -4 }}
@@ -92,8 +92,8 @@ export default function TestimonialsSection() {
               >
                 {/* Quote icon */}
                 <Quote
-                  className="absolute top-6 right-6 w-8 h-8 text-white/[0.03]"
-                  style={{ color: activeIndex === i ? `${testimonial.color}20` : undefined }}
+                  className="absolute top-6 right-6 w-8 h-8 text-[var(--fg-faint)]"
+                  style={{ color: activeIndex === i ? `${testimonial.color}20` : undefined, opacity: 0.15 }}
                 />
 
                 {/* Rating */}
@@ -104,7 +104,7 @@ export default function TestimonialsSection() {
                 </div>
 
                 {/* Text */}
-                <p className="text-sm lg:text-base text-white/50 leading-relaxed mb-6 italic">
+                <p className="text-sm lg:text-base text-[var(--fg-muted)] leading-relaxed mb-6 italic opacity-70">
                   &ldquo;{testimonial.text}&rdquo;
                 </p>
 
@@ -123,14 +123,14 @@ export default function TestimonialsSection() {
                     </div>
                     <div>
                       <p className="text-sm font-medium">{testimonial.name}</p>
-                      <p className="text-[10px] text-white/30 tracking-wider">
+                      <p className="text-[10px] text-[var(--fg-muted)] opacity-40 tracking-wider">
                         {testimonial.role}
                       </p>
                     </div>
                   </div>
 
                   {/* Product tag */}
-                  <span className="hidden sm:block text-[10px] tracking-wider uppercase px-3 py-1 rounded-full bg-white/5 text-white/30">
+                  <span className="hidden sm:block text-[10px] tracking-wider uppercase px-3 py-1 rounded-full bg-[var(--bg-raised)] text-[var(--fg-muted)] opacity-60">
                     {testimonial.product}
                   </span>
                 </div>

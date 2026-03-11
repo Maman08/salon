@@ -34,9 +34,9 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
         ease: [0.25, 0.4, 0.25, 1] as const,
       }}
     >
-      <div className="product-card relative rounded-2xl overflow-hidden bg-white/[0.02] border border-white/5 hover:border-white/10 transition-all duration-500">
+      <div className="product-card relative rounded-2xl overflow-hidden bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-mid)] transition-all duration-500">
         {/* Image container */}
-        <div className="relative aspect-square overflow-hidden bg-[#111]">
+        <div className="relative aspect-square overflow-hidden bg-[var(--bg-raised)]">
           <Link href={`/product/${product.id}`}>
             <Image
               src={product.image}
@@ -61,7 +61,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           {/* Badge */}
           {product.badge && (
             <div className="absolute top-3 left-3 z-10">
-              <span className="px-2.5 py-1 text-[10px] tracking-wider uppercase font-medium bg-gold/90 text-[#0a0a0a] rounded-full backdrop-blur-sm">
+              <span className="px-2.5 py-1 text-[10px] tracking-wider uppercase font-medium bg-gold/90 text-[var(--btn-text)] rounded-full backdrop-blur-sm">
                 {product.badge}
               </span>
             </div>
@@ -77,12 +77,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
           )}
 
           {/* Hover actions */}
-          <div className="absolute inset-x-0 bottom-0 p-3 flex items-center justify-center gap-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-gradient-to-t from-[#0a0a0a]/80 to-transparent pt-12">
+          <div className="absolute inset-x-0 bottom-0 p-3 flex items-center justify-center gap-2 opacity-0 translate-y-4 group-hover:opacity-100 group-hover:translate-y-0 transition-all duration-300 bg-gradient-to-t from-black/80 to-transparent pt-12">
             <motion.button
               whileHover={{ scale: 1.1 }}
               whileTap={{ scale: 0.9 }}
               onClick={() => addItem(product)}
-              className="flex items-center gap-2 px-4 py-2.5 bg-gold/90 hover:bg-gold text-[#0a0a0a] text-xs font-semibold tracking-wider uppercase rounded-full transition-colors"
+              className="flex items-center gap-2 px-4 py-2.5 bg-gold/90 hover:bg-gold text-[var(--btn-text)] text-xs font-semibold tracking-wider uppercase rounded-full transition-colors"
             >
               <ShoppingBag className="w-3.5 h-3.5" />
               Add to Bag
@@ -95,7 +95,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               className={`p-2.5 rounded-full backdrop-blur-sm transition-colors ${
                 isLiked
                   ? "bg-rose/20 text-rose"
-                  : "bg-white/10 text-white/60 hover:text-rose"
+                  : "bg-[var(--glass)] text-[var(--fg-muted)] hover:text-rose"
               }`}
             >
               <Heart className={`w-3.5 h-3.5 ${isLiked ? "fill-current" : ""}`} />
@@ -105,30 +105,22 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               <motion.div
                 whileHover={{ scale: 1.1 }}
                 whileTap={{ scale: 0.9 }}
-                className="p-2.5 rounded-full bg-white/10 text-white/60 hover:text-white backdrop-blur-sm transition-colors"
+                className="p-2.5 rounded-full bg-[var(--glass)] text-[var(--fg-muted)] hover:text-[var(--fg)] backdrop-blur-sm transition-colors"
               >
                 <Eye className="w-3.5 h-3.5" />
               </motion.div>
             </Link>
           </div>
 
-          {/* Salon badge */}
-          {product.usedInSalon && (
-            <div className="absolute bottom-3 left-3 z-10 opacity-100 group-hover:opacity-0 transition-opacity duration-300">
-              <span className="flex items-center gap-1 px-2 py-1 text-[9px] tracking-wider uppercase bg-white/10 backdrop-blur-sm text-white/60 rounded-full border border-white/10">
-                ✨ Used in Salon
-              </span>
-            </div>
-          )}
         </div>
 
         {/* Product info */}
         <div className="p-4">
-          <p className="text-[10px] tracking-widest uppercase text-white/30 mb-1">
+          <p className="text-[10px] tracking-widest uppercase text-[var(--fg-muted)] opacity-50 mb-1">
             {product.brand}
           </p>
           <Link href={`/product/${product.id}`}>
-            <h3 className="text-sm font-medium text-white/80 group-hover:text-white transition-colors duration-300 line-clamp-1 mb-1.5">
+            <h3 className="text-sm font-medium text-[var(--fg-muted)] group-hover:text-[var(--fg)] transition-colors duration-300 line-clamp-1 mb-1.5">
               {product.name}
             </h3>
           </Link>
@@ -142,12 +134,12 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
                   className={`w-3 h-3 ${
                     i < Math.floor(product.rating)
                       ? "text-gold fill-gold"
-                      : "text-white/10"
+                      : "text-[var(--fg-faint)]"
                   }`}
                 />
               ))}
             </div>
-            <span className="text-[10px] text-white/30">
+            <span className="text-[10px] text-[var(--fg-muted)] opacity-40">
               ({product.reviews})
             </span>
           </div>
@@ -158,7 +150,7 @@ export default function ProductCard({ product, index = 0 }: ProductCardProps) {
               ₹{product.price.toLocaleString()}
             </span>
             {product.originalPrice && (
-              <span className="text-xs text-white/20 line-through">
+              <span className="text-xs text-[var(--fg-muted)] opacity-30 line-through">
                 ₹{product.originalPrice.toLocaleString()}
               </span>
             )}

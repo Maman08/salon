@@ -16,7 +16,7 @@ const marqueeItems = [
   "✦",
   "BODY CARE",
   "✦",
-  "SALON GRADE",
+  "PRO GRADE",
   "✦",
   "PREMIUM",
   "✦",
@@ -37,7 +37,7 @@ export default function CTASection() {
   return (
     <section ref={sectionRef} className="relative py-24 lg:py-40 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d0a06] to-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-[var(--bg-raised)] to-[var(--bg)]" />
 
       {/* Marquee band */}
       <motion.div
@@ -71,9 +71,9 @@ export default function CTASection() {
           </Reveal>
 
           <Reveal delay={0.2}>
-            <p className="text-white/40 text-base lg:text-lg leading-relaxed max-w-xl mx-auto mb-10">
-              Experience professional salon-grade beauty products, curated
-              with love and delivered with care. Your glow-up starts here.
+            <p className="text-[var(--fg-muted)] text-base lg:text-lg leading-relaxed max-w-xl mx-auto mb-10 opacity-60">
+              Discover luxury beauty essentials crafted with premium ingredients
+              and delivered with care. Your glow-up starts here.
             </p>
           </Reveal>
 
@@ -83,19 +83,19 @@ export default function CTASection() {
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
-                  className="px-10 py-4 bg-gradient-to-r from-gold to-gold-light text-[#0a0a0a] font-semibold text-sm tracking-wider uppercase rounded-full hover:shadow-xl hover:shadow-gold/20 transition-shadow duration-500"
+                  className="px-10 py-4 bg-gradient-to-r from-gold to-gold-light text-[var(--btn-text)] font-semibold text-sm tracking-wider uppercase rounded-full hover:shadow-xl hover:shadow-gold/20 transition-shadow duration-500"
                 >
                   Shop Now
                 </motion.button>
               </Link>
 
-              <Link href="/salon">
+              <Link href="/collections">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-10 py-4 border border-rose/30 hover:border-rose/50 text-rose-light/70 hover:text-rose-light text-sm tracking-wider uppercase rounded-full transition-all duration-300"
                 >
-                  Visit Our Salon
+                  Explore Collections
                 </motion.button>
               </Link>
             </div>

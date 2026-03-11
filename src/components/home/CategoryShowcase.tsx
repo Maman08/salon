@@ -48,7 +48,7 @@ export default function CategoryShowcase() {
   return (
     <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
       {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] via-[#0d0d0d] to-[#0a0a0a]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-[var(--bg-raised)] to-[var(--bg)]" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section header */}
@@ -84,24 +84,24 @@ export default function CategoryShowcase() {
                 />
 
                 {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-[#0a0a0a] via-[#0a0a0a]/40 to-transparent" />
+                <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/40 to-transparent" />
                 <div className={`absolute inset-0 bg-gradient-to-br ${category.color} opacity-0 group-hover:opacity-100 transition-opacity duration-500`} />
 
                 {/* Content */}
                 <div className="absolute bottom-0 left-0 right-0 p-6">
-                  <p className="text-[10px] tracking-widest uppercase text-white/40 mb-1">
+                  <p className="text-[10px] tracking-widest uppercase text-[var(--fg-faint)] mb-1">
                     {category.count}
                   </p>
-                  <h3 className="font-[family-name:var(--font-playfair)] text-xl lg:text-2xl mb-1">
+                  <h3 className="font-[family-name:var(--font-playfair)] text-xl lg:text-2xl mb-1 text-[var(--fg)]">
                     {category.name}
                   </h3>
-                  <p className="text-sm text-white/40 group-hover:text-white/60 transition-colors duration-300">
+                  <p className="text-sm text-[var(--fg-muted)] group-hover:text-[var(--fg)] transition-colors duration-300">
                     {category.description}
                   </p>
 
                   {/* Arrow */}
                   <motion.div
-                    className="mt-3 w-8 h-8 rounded-full border border-white/10 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
+                    className="mt-3 w-8 h-8 rounded-full border border-[var(--border-mid)] flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300"
                     whileHover={{ scale: 1.1 }}
                   >
                     <span className="text-sm">→</span>
@@ -109,7 +109,7 @@ export default function CategoryShowcase() {
                 </div>
 
                 {/* Corner decoration */}
-                <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-white/10 rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
+                <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-[var(--border-mid)] rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </motion.div>
             </Reveal>
           ))}

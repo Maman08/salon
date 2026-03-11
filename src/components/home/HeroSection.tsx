@@ -9,7 +9,7 @@ import MagneticButton from "@/components/ui/MagneticButton";
 const HeroScene = dynamic(() => import("@/components/3d/HeroScene"), {
   ssr: false,
   loading: () => (
-    <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a] to-[#0f0f0f]" />
+    <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] to-[var(--bg)]" />
   ),
 });
 
@@ -33,8 +33,8 @@ export default function HeroSection() {
       <HeroScene />
 
       {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[#0a0a0a]/40 via-transparent to-[#0a0a0a] z-[1]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[#0a0a0a]/60 via-transparent to-[#0a0a0a]/60 z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/40 via-transparent to-[var(--bg)] z-[1]" />
+      <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg)]/60 via-transparent to-[var(--bg)]/60 z-[1]" />
 
       {/* Content */}
       <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
@@ -48,7 +48,7 @@ export default function HeroSection() {
         >
           <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
           <span className="text-xs tracking-widest uppercase text-gold-light">
-            Professional Salon Products — Now Online
+            Premium Beauty, Delivered to You
           </span>
         </motion.div>
 
@@ -83,11 +83,11 @@ export default function HeroSection() {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-xl mx-auto text-white/50 text-base sm:text-lg leading-relaxed mb-10"
+          className="max-w-xl mx-auto text-[var(--fg-muted)] text-base sm:text-lg leading-relaxed mb-10"
         >
-          Premium beauty products curated by salon professionals.
+          Luxury beauty essentials, expertly curated for your every ritual.
           <br className="hidden sm:block" />
-          The same luxury we use — now delivered to your door.
+          Professional-grade quality, delivered to your door.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -99,12 +99,12 @@ export default function HeroSection() {
           className="flex flex-col sm:flex-row items-center justify-center gap-4"
         >
           <Link href="/shop">
-            <MagneticButton className="group px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-[#0a0a0a] font-semibold text-sm tracking-wider uppercase rounded-full flex items-center gap-2 hover:shadow-xl hover:shadow-gold/20 transition-shadow duration-500">
+            <MagneticButton className="group px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-[var(--btn-text)] font-semibold text-sm tracking-wider uppercase rounded-full flex items-center gap-2 hover:shadow-xl hover:shadow-gold/20 transition-shadow duration-500">
               Explore Collection
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </MagneticButton>
           </Link>
-          <MagneticButton className="group px-8 py-4 border border-white/10 hover:border-white/20 text-white/70 hover:text-white font-medium text-sm tracking-wider uppercase rounded-full flex items-center gap-2 transition-all duration-300">
+          <MagneticButton className="group px-8 py-4 border border-[var(--border-mid)] hover:border-[var(--border-mid)] text-[var(--fg-muted)] hover:text-[var(--fg)] font-medium text-sm tracking-wider uppercase rounded-full flex items-center gap-2 transition-all duration-300">
             <Play className="w-4 h-4" />
             Our Story
           </MagneticButton>
@@ -121,13 +121,13 @@ export default function HeroSection() {
           {[
             { number: "50+", label: "Products" },
             { number: "10K+", label: "Happy Clients" },
-            { number: "5★", label: "Rated Salon" },
+            { number: "5★", label: "Expert Rated" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">
               <p className="text-2xl sm:text-3xl font-[family-name:var(--font-playfair)] text-gradient-gold">
                 {stat.number}
               </p>
-              <p className="text-xs text-white/30 tracking-wider uppercase mt-1">
+              <p className="text-xs text-[var(--fg-muted)] opacity-40 tracking-wider uppercase mt-1">
                 {stat.label}
               </p>
             </div>
@@ -142,7 +142,7 @@ export default function HeroSection() {
         animate={{ opacity: 1 }}
         transition={{ delay: 2 }}
       >
-        <span className="text-[10px] tracking-widest uppercase text-white/20">
+        <span className="text-[10px] tracking-widest uppercase text-[var(--fg-muted)] opacity-30">
           Scroll
         </span>
         <motion.div
