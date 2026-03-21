@@ -32,12 +32,11 @@ export default function HeroSection() {
       {/* 3D Background */}
       <HeroScene />
 
-      {/* Gradient overlays */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/40 via-transparent to-[var(--bg)] z-[1]" />
-      <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg)]/60 via-transparent to-[var(--bg)]/60 z-[1]" />
+      {/* Gradient overlays — subtle vignette, not full coverage */}
+      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/30 via-transparent to-[var(--bg)]/80 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 sm:pt-0">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 sm:pt-0">
         {/* Badge */}
         <motion.div
           custom={0}
