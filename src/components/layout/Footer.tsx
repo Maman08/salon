@@ -66,7 +66,7 @@ export default function Footer() {
               <ul className="space-y-3">
                 <li className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)]">
                   <Mail className="w-4 h-4 flex-shrink-0 text-gold/40" />
-                  <a href="mailto:uniquevibegrenix@gmail.com" className="hover:text-gold transition-colors duration-300">
+                  <a href="mailto:uniquevibegrenix@gmail.com" className="hover:text-gold transition-colors duration-300 break-all">
                     uniquevibegrenix@gmail.com
                   </a>
                 </li>

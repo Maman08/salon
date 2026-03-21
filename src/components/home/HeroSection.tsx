@@ -28,7 +28,7 @@ const textVariants = {
 
 export default function HeroSection() {
   return (
-    <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+    <section className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
       {/* 3D Background */}
       <HeroScene />
 
@@ -104,10 +104,12 @@ export default function HeroSection() {
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </MagneticButton>
           </Link>
-          <MagneticButton className="group px-8 py-4 border border-[var(--border-mid)] hover:border-[var(--border-mid)] text-[var(--fg-muted)] hover:text-[var(--fg)] font-medium text-sm tracking-wider uppercase rounded-full flex items-center gap-2 transition-all duration-300">
-            <Play className="w-4 h-4" />
-            Our Story
-          </MagneticButton>
+          <Link href="/about">
+            <MagneticButton className="group px-8 py-4 border border-[var(--border-mid)] hover:border-[var(--border-mid)] text-[var(--fg-muted)] hover:text-[var(--fg)] font-medium text-sm tracking-wider uppercase rounded-full flex items-center gap-2 transition-all duration-300">
+              <Play className="w-4 h-4" />
+              Our Story
+            </MagneticButton>
+          </Link>
         </motion.div>
 
         {/* Stats */}

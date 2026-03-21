@@ -459,10 +459,8 @@ export default function CheckoutPage() {
 
         <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 items-start">
           {/* ── Left: Form ──────────────────────────────────────────────────── */}
-          <div className="lg:col-span-3 space-y-6">
+          <div className="lg:col-span-3 space-y-6 order-2 lg:order-1">
             <AnimatePresence mode="wait">
-
-              {/* Step 1: Delivery Details */}
               {step === "details" && (
                 <motion.div
                   key="details"
@@ -703,7 +701,7 @@ export default function CheckoutPage() {
           </div>
 
           {/* ── Right: Order Summary ─────────────────────────────────────── */}
-          <div className="lg:col-span-2">
+          <div className="lg:col-span-2 order-1 lg:order-2">
             <div className="sticky top-24 p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
               <h2 className="text-sm font-semibold tracking-wider uppercase text-[var(--fg-muted)] mb-5">
                 Order Summary ({totalItems} {totalItems === 1 ? "item" : "items"})

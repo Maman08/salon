@@ -59,7 +59,7 @@ export default function AboutPage() {
   return (
     <div className="min-h-screen bg-[var(--bg)]">
       {/* Hero */}
-      <section ref={heroRef} className="relative h-screen flex items-center justify-center overflow-hidden">
+      <section ref={heroRef} className="relative min-h-[100svh] flex items-center justify-center overflow-hidden">
         <motion.div style={{ y: heroY }} className="absolute inset-0">
           <div
             className="absolute inset-0 bg-cover bg-center"
@@ -173,15 +173,15 @@ export default function AboutPage() {
           </Reveal>
 
           <div className="relative">
-            <div className="absolute left-8 lg:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-gold/20 via-gold/10 to-transparent" />
+            <div className="absolute left-4 sm:left-8 lg:left-1/2 top-0 bottom-0 w-[1px] bg-gradient-to-b from-gold/20 via-gold/10 to-transparent" />
 
             {timeline.map((item, i) => (
               <Reveal key={item.title} delay={i * 0.15}>
                 <div className={`relative flex items-start gap-8 mb-12 ${i % 2 === 0 ? "lg:flex-row-reverse" : ""}`}>
-                  <div className="absolute left-8 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gold/20 border-2 border-gold/40 z-10">
+                  <div className="absolute left-4 sm:left-8 lg:left-1/2 -translate-x-1/2 w-4 h-4 rounded-full bg-gold/20 border-2 border-gold/40 z-10">
                     <div className="absolute inset-1 rounded-full bg-gold/60" />
                   </div>
-                  <div className={`ml-16 lg:ml-0 lg:w-1/2 ${i % 2 === 0 ? "lg:pr-16 lg:text-right" : "lg:pl-16"}`}>
+                  <div className={`ml-10 sm:ml-16 lg:ml-0 lg:w-1/2 ${i % 2 === 0 ? "lg:pr-16 lg:text-right" : "lg:pl-16"}`}>
                     <h3 className="text-lg font-medium mb-2 text-[var(--fg)]">{item.title}</h3>
                     <p className="text-sm text-[var(--fg-muted)] opacity-60 leading-relaxed">{item.description}</p>
                   </div>

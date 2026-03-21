@@ -39,20 +39,20 @@ export default function BrandStory() {
 
               {/* Floating stat card */}
               <motion.div
-                className="absolute -bottom-6 -right-6 lg:right-[-2rem] p-6 rounded-2xl glass-gold max-w-[240px]"
+                className="absolute -bottom-6 right-2 sm:-right-6 lg:right-[-2rem] p-4 sm:p-6 rounded-2xl glass-gold max-w-[200px] sm:max-w-[240px]"
                 animate={{ y: [0, -8, 0] }}
                 transition={{ duration: 4, repeat: Infinity, ease: "easeInOut" }}
               >
-                <p className="text-3xl font-[family-name:var(--font-playfair)] text-gradient-gold mb-1">
+                <p className="text-2xl sm:text-3xl font-[family-name:var(--font-playfair)] text-gradient-gold mb-1">
                   50+
                 </p>
-                <p className="text-xs text-[var(--fg-muted)] opacity-60 tracking-wider">
+                <p className="text-[10px] sm:text-xs text-[var(--fg-muted)] opacity-60 tracking-wider">
                   Expertly curated beauty products
                 </p>
               </motion.div>
 
-              <div className="absolute -top-4 -left-4 w-24 h-24 border border-gold/10 rounded-2xl" />
-              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gold/5 rounded-full blur-xl" />
+              <div className="absolute -top-4 -left-4 w-24 h-24 border border-gold/10 rounded-2xl hidden sm:block" />
+              <div className="absolute -bottom-4 -left-4 w-16 h-16 bg-gold/5 rounded-full blur-xl hidden sm:block" />
             </motion.div>
           </Reveal>
 

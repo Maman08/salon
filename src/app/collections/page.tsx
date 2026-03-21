@@ -77,7 +77,7 @@ export default function CollectionsPage() {
                 whileHover={{ y: -4 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                <div className="relative aspect-[21/9] sm:aspect-[3/1] lg:aspect-[4/1]">
+                <div className="relative aspect-[4/3] sm:aspect-[3/1] lg:aspect-[4/1]">
                   <Image
                     src={collection.image}
                     alt={collection.name}
