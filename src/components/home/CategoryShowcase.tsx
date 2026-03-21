@@ -36,8 +36,9 @@ export default function CategoryShowcase() {
 
   return (
     <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)] via-[var(--bg-raised)] to-[var(--bg)]" />
+      {/* Background — starts from same --bg so no seam with hero */}
+      <div className="absolute inset-0 bg-[var(--bg)]" />
+      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-[var(--bg-raised)]/60 to-transparent" />
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
         {/* Section header */}

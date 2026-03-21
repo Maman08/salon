@@ -32,11 +32,13 @@ export default function HeroSection() {
       {/* 3D Background */}
       <HeroScene />
 
-      {/* Gradient overlays — subtle vignette, not full coverage */}
-      <div className="absolute inset-0 bg-gradient-to-b from-[var(--bg)]/30 via-transparent to-[var(--bg)]/80 z-[1]" />
+      {/* Top vignette — blends navbar area */}
+      <div className="absolute inset-x-0 top-0 h-32 bg-gradient-to-b from-[var(--bg)]/60 to-transparent z-[1]" />
+      {/* Bottom fade — FULLY blends into next section, no seam */}
+      <div className="absolute inset-x-0 bottom-0 h-48 bg-gradient-to-t from-[var(--bg)] to-transparent z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-16 sm:pt-0">
+      <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
         {/* Badge */}
         <motion.div
           custom={0}
@@ -117,18 +119,18 @@ export default function HeroSection() {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="mt-10 sm:mt-16 lg:mt-24 flex items-center justify-center gap-6 sm:gap-16"
+          className="mt-10 sm:mt-16 lg:mt-24 flex items-center justify-center gap-4 xs:gap-6 sm:gap-16"
         >
           {[
             { number: "6+", label: "Products" },
-            { number: "100%", label: "Premium Quality" },
-            { number: "5★", label: "Expert Rated" },
+            { number: "100%", label: "Quality" },
+            { number: "5★", label: "Rated" },
           ].map((stat) => (
-            <div key={stat.label} className="text-center">
+            <div key={stat.label} className="text-center min-w-[60px]">
               <p className="text-2xl sm:text-3xl font-[family-name:var(--font-playfair)] text-gradient-gold">
                 {stat.number}
               </p>
-              <p className="text-xs text-[var(--fg-muted)] opacity-40 tracking-wider uppercase mt-1">
+              <p className="text-[10px] sm:text-xs text-[var(--fg-muted)] opacity-40 tracking-wider uppercase mt-1 whitespace-nowrap">
                 {stat.label}
               </p>
             </div>

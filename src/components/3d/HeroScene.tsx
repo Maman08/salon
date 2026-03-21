@@ -95,7 +95,7 @@ function ResponsiveCamera() {
 function Scene({ bg, isMobile }: { bg: string; isMobile: boolean }) {
   const isDark = bg === "#07090f";
   // On mobile, pull spheres further back and make them smaller
-  const s = isMobile ? 0.6 : 1; // scale multiplier
+  const s = isMobile ? 0.5 : 1; // scale multiplier
   return (
     <>
       <color attach="background" args={[bg]} />
@@ -108,9 +108,9 @@ function Scene({ bg, isMobile }: { bg: string; isMobile: boolean }) {
 
       <GlowingSphere position={[-2.5, 1, -1.5 * s]} color={isDark ? "#c9a96e" : "#8ecfa0"} speed={1.5} size={0.8 * s} />
       <GlowingSphere position={[2.8, -0.5, -2.5 * s]} color={isDark ? "#d4a0a0" : "#a8ddb8"} speed={1.2} size={0.6 * s} />
-      <GlowingSphere position={[0.5, 2, -2 * s]} color={isDark ? "#e4d5b7" : "#c0eaca"} speed={1.8} size={0.4 * s} />
-      <GlowingSphere position={[-1.5, -1.5, -1 * s]} color={isDark ? "#9e6b6b" : "#78c090"} speed={1.0} size={0.5 * s} />
-      <GlowingSphere position={[1.8, 1.5, -3.5 * s]} color={isDark ? "#c9a96e" : "#b0dfc0"} speed={2.0} size={0.7 * s} />
+      <GlowingSphere position={[0.5, 1.2, -2 * s]} color={isDark ? "#e4d5b7" : "#c0eaca"} speed={1.8} size={0.4 * s} />
+      <GlowingSphere position={[-1.5, -1.2, -1 * s]} color={isDark ? "#9e6b6b" : "#78c090"} speed={1.0} size={0.5 * s} />
+      <GlowingSphere position={[1.8, 1.2, -3.5 * s]} color={isDark ? "#c9a96e" : "#b0dfc0"} speed={2.0} size={0.7 * s} />
 
       <GoldParticles isDark={isDark} />
     </>
