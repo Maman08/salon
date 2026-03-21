@@ -19,8 +19,8 @@ export default function BrandStory() {
     <section ref={sectionRef} className="relative py-24 lg:py-40 overflow-hidden">
       {/* Background */}
       <div className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(201,169,110,0.04),transparent_50%)]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(212,160,160,0.04),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_30%_50%,rgba(42,154,92,0.07),transparent_50%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(circle_at_70%_50%,rgba(90,171,58,0.05),transparent_50%)]" />
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">
@@ -32,7 +32,7 @@ export default function BrandStory() {
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-rose/5 to-transparent z-10" />
                 <img
                   src="https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=800&h=1000&fit=crop"
-                  alt="Unique Vibe Grenix beauty products"
+                  alt="Grenix beauty products"
                   className="w-full h-full object-cover"
                 />
               </div>
@@ -75,7 +75,7 @@ export default function BrandStory() {
 
             <Reveal delay={0.2}>
               <p className="text-[var(--fg-muted)] leading-relaxed mb-6 opacity-60">
-                Unique Vibe Grenix was born from a love of beauty that goes
+                Grenix was born from a love of beauty that goes
                 beyond the surface. We believe that luxurious, professional-grade
                 products shouldn&apos;t be a privilege — they should be part of
                 every person&apos;s daily ritual.

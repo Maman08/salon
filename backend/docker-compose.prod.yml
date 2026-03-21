@@ -1,0 +1,43 @@
+# ─── PRODUCTION Docker Compose ────────────────────────────────────────────────
+# Database: PostgreSQL installed natively on EC2 (not in Docker)
+# Storage: AWS S3
+# Backend: FastAPI (Gunicorn + Uvicorn workers)
+# Frontend: Next.js standalone
+#
+# Usage:
+#   docker compose -f docker-compose.prod.yml --env-file .env.prod up -d --build
+# ──────────────────────────────────────────────────────────────────────────────
+
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile.prod
+    restart: always
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env.prod
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+      start_period: 15s
+
+  frontend:
+    build:
+      context: ..
+      dockerfile: Dockerfile
+      args:
+        NEXT_PUBLIC_API_URL: ${NEXT_PUBLIC_API_URL}
+    restart: always
+    ports:
+      - "3000:3000"
+    depends_on:
+      backend:
+        condition: service_healthy
+    environment:
+      - NODE_ENV=production

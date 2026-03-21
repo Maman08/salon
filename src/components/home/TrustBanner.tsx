@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Reveal from "@/components/ui/Reveal";
-import { Truck, Shield, RotateCcw, Headphones, Sparkles, Award } from "lucide-react";
+import { Truck, Shield, Headphones, Sparkles, Award, Lock } from "lucide-react";
 
 const features = [
   {
@@ -24,9 +24,9 @@ const features = [
     color: "#89b5c9",
   },
   {
-    icon: RotateCcw,
-    title: "Easy Returns",
-    description: "Hassle-free 30-day return policy on all products",
+    icon: Lock,
+    title: "Secure Checkout",
+    description: "Safe & encrypted payments with trusted gateways",
     color: "#b89ec9",
   },
   {

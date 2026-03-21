@@ -1,7 +1,6 @@
 import HeroSection from "@/components/home/HeroSection";
 import FeaturedProducts from "@/components/home/FeaturedProducts";
 import CategoryShowcase from "@/components/home/CategoryShowcase";
-import BrandStory from "@/components/home/BrandStory";
 import TestimonialsSection from "@/components/home/TestimonialsSection";
 import TrustBanner from "@/components/home/TrustBanner";
 import CTASection from "@/components/home/CTASection";
@@ -12,7 +11,6 @@ export default function Home() {
       <HeroSection />
       <CategoryShowcase />
       <FeaturedProducts />
-      <BrandStory />
       <TestimonialsSection />
       <TrustBanner />
       <CTASection />

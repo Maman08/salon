@@ -5,6 +5,7 @@ import { X, Minus, Plus, ShoppingBag, ArrowRight } from "lucide-react";
 import { useCart } from "./CartProvider";
 import Image from "next/image";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
 
 interface CartDrawerProps {
   isOpen: boolean;
@@ -14,6 +15,7 @@ interface CartDrawerProps {
 export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
   const { items, removeItem, updateQuantity, totalPrice, totalItems } =
     useCart();
+  const router = useRouter();
 
   return (
     <AnimatePresence>
@@ -192,6 +194,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                   className="w-full py-3.5 bg-gradient-to-r from-gold to-gold-light text-[var(--btn-text)] font-semibold text-sm tracking-wider uppercase rounded-xl hover:shadow-lg hover:shadow-gold/20 transition-shadow duration-300"
                   whileHover={{ scale: 1.01 }}
                   whileTap={{ scale: 0.98 }}
+                  onClick={() => { onClose(); router.push("/checkout"); }}
                 >
                   Proceed to Checkout
                 </motion.button>

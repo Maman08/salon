@@ -8,19 +8,15 @@ import Link from "next/link";
 const marqueeItems = [
   "SKINCARE",
   "✦",
-  "HAIRCARE",
-  "✦",
-  "MAKEUP",
-  "✦",
   "FRAGRANCE",
-  "✦",
-  "BODY CARE",
-  "✦",
-  "PRO GRADE",
   "✦",
   "PREMIUM",
   "✦",
   "LUXURY",
+  "✦",
+  "GRENIX",
+  "✦",
+  "GLOW",
   "✦",
 ];
 

@@ -1,8 +1,10 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, useEffect, Suspense } from "react";
+import { useSearchParams } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
-import { products, categories } from "@/data/products";
+import { fetchProducts, fetchCategories, ApiCategory } from "@/lib/api";
+import { Product, mapListItemToProduct, CategoryMap } from "@/lib/products";
 import ProductCard from "@/components/product/ProductCard";
 import Reveal from "@/components/ui/Reveal";
 import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
@@ -16,10 +18,59 @@ const sortOptions = [
 ];
 
 export default function ShopPage() {
-  const [activeCategory, setActiveCategory] = useState("all");
+  return (
+    <Suspense fallback={<div className="min-h-screen pt-24 lg:pt-32 flex items-center justify-center"><div className="w-8 h-8 border-2 border-gold/30 border-t-gold rounded-full animate-spin" /></div>}>
+      <ShopContent />
+    </Suspense>
+  );
+}
+
+function ShopContent() {
+  const searchParams = useSearchParams();
+  const [products, setProducts] = useState<Product[]>([]);
+  const [categories, setCategories] = useState<{ id: string; name: string; icon: string }[]>([
+    { id: "all", name: "All Products", icon: "✨" },
+  ]);
+  const [loading, setLoading] = useState(true);
+  const [activeCategory, setActiveCategory] = useState(
+    searchParams.get("category") || "all"
+  );
   const [sortBy, setSortBy] = useState("featured");
   const [showFilters, setShowFilters] = useState(false);
   const [priceRange, setPriceRange] = useState<[number, number]>([0, 10000]);
+
+  // Fetch products & categories from API
+  useEffect(() => {
+    const load = async () => {
+      try {
+        const [productRes, categoryRes] = await Promise.all([
+          fetchProducts({ per_page: 100 }),
+          fetchCategories(),
+        ]);
+
+        // Build a map from category UUID → slug for proper category assignment
+        const categoryMap: CategoryMap = {};
+        categoryRes.forEach((c: ApiCategory) => {
+          categoryMap[c.id] = c.slug;
+        });
+
+        setProducts(productRes.items.map((p) => mapListItemToProduct(p, categoryMap)));
+        setCategories([
+          { id: "all", name: "All Products", icon: "✨" },
+          ...categoryRes.map((c: ApiCategory) => ({
+            id: c.slug,
+            name: c.name,
+            icon: c.slug === "fragrances" ? "🌸" : "🧴",
+          })),
+        ]);
+      } catch (err) {
+        console.error("Failed to load shop data:", err);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, []);
 
   const filteredProducts = useMemo(() => {
     let result = products;
@@ -50,7 +101,7 @@ export default function ShopPage() {
     }
 
     return result;
-  }, [activeCategory, sortBy, priceRange]);
+  }, [products, activeCategory, sortBy, priceRange]);
 
   return (
     <div className="min-h-screen pt-24 lg:pt-32">
@@ -68,7 +119,7 @@ export default function ShopPage() {
               The <span className="text-gradient-gold">Shop</span>
             </h1>
             <p className="text-[var(--fg-muted)] max-w-lg mx-auto">
-              Professional salon-grade beauty products, handpicked and tested by
+              Premium beauty products, handpicked and tested by
               our experts. Find your perfect beauty ritual.
             </p>
           </Reveal>
@@ -99,20 +150,20 @@ export default function ShopPage() {
         </Reveal>
 
         {/* Toolbar */}
-        <div className="flex items-center justify-between mb-8 pb-6 border-b border-[var(--border)]">
+        <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 mb-8 pb-6 border-b border-[var(--border)]">
           <p className="text-sm text-[var(--fg-faint)]">
             Showing{" "}
             <span className="text-[var(--fg-muted)]">{filteredProducts.length}</span>{" "}
             products
           </p>
 
-          <div className="flex items-center gap-3">
+          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
             {/* Sort dropdown */}
             <div className="relative">
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="appearance-none bg-[var(--glass)] border border-[var(--border)] rounded-lg px-4 py-2 pr-8 text-sm text-[var(--fg-muted)] outline-none focus:border-gold/30 transition-colors cursor-pointer"
+                className="appearance-none bg-[var(--glass)] border border-[var(--border)] rounded-lg px-3 sm:px-4 py-2 pr-8 text-xs sm:text-sm text-[var(--fg-muted)] outline-none focus:border-gold/30 transition-colors cursor-pointer flex-1 sm:flex-none"
               >
                 {sortOptions.map((opt) => (
                   <option
@@ -155,7 +206,7 @@ export default function ShopPage() {
               className="overflow-hidden mb-8"
             >
               <div className="p-6 rounded-2xl bg-[var(--bg-card)] border border-[var(--border)]">
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+                <div className="grid grid-cols-1 gap-6">
                   {/* Price range */}
                   <div>
                     <label className="text-xs tracking-wider uppercase text-[var(--fg-muted)] mb-3 block">
@@ -183,25 +234,6 @@ export default function ShopPage() {
                       />
                     </div>
                   </div>
-
-                  {/* Salon tested filter */}
-                  <div>
-                    <label className="text-xs tracking-wider uppercase text-[var(--fg-muted)] mb-3 block">
-                      Quick Filters
-                    </label>
-                    <div className="flex flex-wrap gap-2">
-                      {["Salon Tested", "On Sale", "Top Rated", "New Arrivals"].map(
-                        (filter) => (
-                          <button
-                            key={filter}
-                            className="px-3 py-1.5 rounded-full text-xs bg-[var(--glass)] text-[var(--fg-muted)] border border-[var(--border)] hover:border-gold/20 hover:text-gold/70 transition-all"
-                          >
-                            {filter}
-                          </button>
-                        )
-                      )}
-                    </div>
-                  </div>
                 </div>
               </div>
             </motion.div>
@@ -209,23 +241,41 @@ export default function ShopPage() {
         </AnimatePresence>
 
         {/* Products grid */}
-        <AnimatePresence mode="wait">
-          <motion.div
-            key={activeCategory + sortBy}
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            transition={{ duration: 0.3 }}
-            className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6"
-          >
-            {filteredProducts.map((product, i) => (
-              <ProductCard key={product.id} product={product} index={i} />
+        {loading ? (
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6">
+            {Array.from({ length: 8 }).map((_, i) => (
+              <div
+                key={i}
+                className="rounded-2xl bg-[var(--bg-card)] border border-[var(--border)] overflow-hidden animate-pulse"
+              >
+                <div className="aspect-square bg-[var(--bg-raised)]" />
+                <div className="p-4 space-y-2">
+                  <div className="h-2 bg-[var(--bg-raised)] rounded w-16" />
+                  <div className="h-3 bg-[var(--bg-raised)] rounded w-full" />
+                  <div className="h-3 bg-[var(--bg-raised)] rounded w-20" />
+                </div>
+              </div>
             ))}
-          </motion.div>
-        </AnimatePresence>
+          </div>
+        ) : (
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={activeCategory + sortBy}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3 }}
+              className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4 lg:gap-6"
+            >
+              {filteredProducts.map((product, i) => (
+                <ProductCard key={product.id} product={product} index={i} />
+              ))}
+            </motion.div>
+          </AnimatePresence>
+        )}
 
         {/* Empty state */}
-        {filteredProducts.length === 0 && (
+        {!loading && filteredProducts.length === 0 && (
           <div className="text-center py-20">
             <p className="text-4xl mb-4">🔍</p>
             <p className="text-[var(--fg-muted)] text-lg">No products found</p>

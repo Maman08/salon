@@ -2,8 +2,9 @@
 
 import { useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Float, MeshDistortMaterial, Sphere, Environment } from "@react-three/drei";
+import { Float, MeshDistortMaterial, Sphere } from "@react-three/drei";
 import * as THREE from "three";
+import { useTheme } from "@/lib/ThemeProvider";
 
 function GlowingSphere({
   position,
@@ -30,19 +31,21 @@ function GlowingSphere({
       <Sphere ref={meshRef} args={[size, 64, 64]} position={position}>
         <MeshDistortMaterial
           color={color}
-          roughness={0.1}
-          metalness={0.9}
-          distort={0.3}
+          roughness={0.3}
+          metalness={0.4}
+          distort={0.25}
           speed={2}
           transparent
-          opacity={0.6}
+          opacity={0.35}
+          emissive={color}
+          emissiveIntensity={0.08}
         />
       </Sphere>
     </Float>
   );
 }
 
-function GoldParticles() {
+function GoldParticles({ isDark }: { isDark: boolean }) {
   const particlesRef = useRef<THREE.Points>(null);
   const count = 200;
 
@@ -68,45 +71,50 @@ function GoldParticles() {
       </bufferGeometry>
       <pointsMaterial
         size={0.015}
-        color="#c9a96e"
+        color={isDark ? "#c9a96e" : "#2a9a5c"}
         transparent
-        opacity={0.6}
+        opacity={isDark ? 0.6 : 0.50}
         sizeAttenuation
       />
     </points>
   );
 }
 
-function Scene() {
+function Scene({ bg }: { bg: string }) {
+  const isDark = bg === "#07090f";
   return (
     <>
-      <ambientLight intensity={0.2} />
-      <directionalLight position={[5, 5, 5]} intensity={0.5} color="#c9a96e" />
-      <directionalLight position={[-5, 3, -5]} intensity={0.3} color="#d4a0a0" />
-      <pointLight position={[0, 0, 3]} intensity={0.5} color="#c9a96e" />
+      <color attach="background" args={[bg]} />
+      <ambientLight intensity={isDark ? 0.3 : 0.7} />
+      <directionalLight position={[5, 5, 5]} intensity={isDark ? 0.8 : 0.5} color={isDark ? "#c9a96e" : "#a8d8b0"} />
+      <directionalLight position={[-5, 3, -5]} intensity={isDark ? 0.4 : 0.3} color={isDark ? "#d4a0a0" : "#c8ecd0"} />
+      <pointLight position={[0, 0, 3]} intensity={isDark ? 0.6 : 0.3} color={isDark ? "#c9a96e" : "#b8e0c0"} />
+      <pointLight position={[-3, -2, 2]} intensity={isDark ? 0.3 : 0.2} color={isDark ? "#d4a0a0" : "#d0f0d8"} />
 
-      <GlowingSphere position={[-2.5, 1, -1]} color="#c9a96e" speed={1.5} size={0.8} />
-      <GlowingSphere position={[2.8, -0.5, -2]} color="#d4a0a0" speed={1.2} size={0.6} />
-      <GlowingSphere position={[0.5, 2, -1.5]} color="#e4d5b7" speed={1.8} size={0.4} />
-      <GlowingSphere position={[-1.5, -1.5, -0.5]} color="#9e6b6b" speed={1.0} size={0.5} />
-      <GlowingSphere position={[1.8, 1.5, -3]} color="#c9a96e" speed={2.0} size={0.7} />
+      <GlowingSphere position={[-2.5, 1, -1]} color={isDark ? "#c9a96e" : "#8ecfa0"} speed={1.5} size={0.8} />
+      <GlowingSphere position={[2.8, -0.5, -2]} color={isDark ? "#d4a0a0" : "#a8ddb8"} speed={1.2} size={0.6} />
+      <GlowingSphere position={[0.5, 2, -1.5]} color={isDark ? "#e4d5b7" : "#c0eaca"} speed={1.8} size={0.4} />
+      <GlowingSphere position={[-1.5, -1.5, -0.5]} color={isDark ? "#9e6b6b" : "#78c090"} speed={1.0} size={0.5} />
+      <GlowingSphere position={[1.8, 1.5, -3]} color={isDark ? "#c9a96e" : "#b0dfc0"} speed={2.0} size={0.7} />
 
-      <GoldParticles />
-      <Environment preset="studio" />
+      <GoldParticles isDark={isDark} />
     </>
   );
 }
 
 export default function HeroScene() {
+  const { theme } = useTheme();
+  const bg = theme === "dark" ? "#07090f" : "#d8f0e0";
+
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0" style={{ background: bg }}>
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}
         dpr={[1, 1.5]}
-        gl={{ antialias: true, alpha: true }}
-        style={{ background: "transparent" }}
+        gl={{ antialias: true, alpha: false }}
+        style={{ background: bg }}
       >
-        <Scene />
+        <Scene bg={bg} />
       </Canvas>
     </div>
   );

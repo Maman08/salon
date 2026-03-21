@@ -6,7 +6,8 @@ import Footer from "@/components/layout/Footer";
 import CustomCursor from "@/components/ui/CustomCursor";
 import SmoothScroll from "@/components/ui/SmoothScroll";
 import CartProvider from "@/components/cart/CartProvider";
-import ThemeProvider from "@/components/ui/ThemeProvider";
+import AuthProvider from "@/lib/AuthProvider";
+import ThemeProvider from "@/lib/ThemeProvider";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -21,10 +22,10 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Unique Vibe Grenix | Premium Beauty Products",
+  title: "Grenix | Premium Beauty Products",
   description:
-    "Discover luxury beauty products crafted for the modern woman and man. Premium skincare, haircare, and beauty essentials — experience the vibe.",
-  keywords: ["beauty", "skincare", "haircare", "premium", "luxury", "cosmetics"],
+    "Discover luxury beauty products crafted for the modern woman and man. Premium skincare and fragrance essentials — experience the Grenix difference.",
+  keywords: ["beauty", "skincare", "fragrance", "premium", "luxury", "cosmetics"],
 };
 
 export default function RootLayout({
@@ -38,14 +39,16 @@ export default function RootLayout({
         className={`${inter.variable} ${playfair.variable} antialiased`}
       >
         <ThemeProvider>
-          <CartProvider>
-            <SmoothScroll>
-              <CustomCursor />
-              <Navbar />
-              <main>{children}</main>
-              <Footer />
-            </SmoothScroll>
-          </CartProvider>
+          <AuthProvider>
+            <CartProvider>
+              <SmoothScroll>
+                <CustomCursor />
+                <Navbar />
+                <main>{children}</main>
+                <Footer />
+              </SmoothScroll>
+            </CartProvider>
+          </AuthProvider>
         </ThemeProvider>
       </body>
     </html>

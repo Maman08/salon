@@ -44,10 +44,10 @@ export default function HeroSection() {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-gold/10 border border-gold/20 mb-8"
+          className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-gold/10 border border-gold/20 mb-8"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
-          <span className="text-xs tracking-widest uppercase text-gold-light">
+          <span className="text-[10px] sm:text-xs tracking-widest uppercase text-gold-light">
             Premium Beauty, Delivered to You
           </span>
         </motion.div>
@@ -116,11 +116,11 @@ export default function HeroSection() {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="mt-16 lg:mt-24 flex items-center justify-center gap-8 sm:gap-16"
+          className="mt-16 lg:mt-24 flex items-center justify-center gap-6 sm:gap-16"
         >
           {[
-            { number: "50+", label: "Products" },
-            { number: "10K+", label: "Happy Clients" },
+            { number: "6+", label: "Products" },
+            { number: "100%", label: "Premium Quality" },
             { number: "5★", label: "Expert Rated" },
           ].map((stat) => (
             <div key={stat.label} className="text-center">

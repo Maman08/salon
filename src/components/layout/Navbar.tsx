@@ -3,32 +3,23 @@
 import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Link from "next/link";
-import {
-  ShoppingBag,
-  Search,
-  Menu,
-  X,
-  Heart,
-  User,
-  Sparkles,
-} from "lucide-react";
+import { ShoppingBag, Menu, X, Heart, User, Sparkles, Sun, Moon } from "lucide-react";
 import { useCart } from "@/components/cart/CartProvider";
 import CartDrawer from "@/components/cart/CartDrawer";
-import ThemeToggle from "@/components/ui/ThemeToggle";
+import { useTheme } from "@/lib/ThemeProvider";
 
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
   { href: "/collections", label: "Collections" },
-  { href: "/lookbook", label: "Lookbook" },
   { href: "/about", label: "Our Story" },
 ];
 
 export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [searchOpen, setSearchOpen] = useState(false);
   const { totalItems, isOpen, setIsOpen } = useCart();
+  const { theme, toggleTheme } = useTheme();
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -48,7 +39,6 @@ export default function Navbar() {
         animate={{ y: 0 }}
         transition={{ duration: 0.8, ease: [0.25, 0.4, 0.25, 1] }}
       >
-        {/* Top announcement bar */}
         <AnimatePresence>
           {!scrolled && (
             <motion.div
@@ -71,21 +61,15 @@ export default function Navbar() {
 
         <nav className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16 lg:h-20">
-            {/* Mobile menu button */}
             <button
               className="lg:hidden p-2 -ml-2 text-[var(--fg-muted)] hover:text-[var(--fg)]"
               onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             >
-              {mobileMenuOpen ? (
-                <X className="w-5 h-5" />
-              ) : (
-                <Menu className="w-5 h-5" />
-              )}
+              {mobileMenuOpen ? <X className="w-5 h-5" /> : <Menu className="w-5 h-5" />}
             </button>
 
-            {/* Nav links - desktop left */}
             <div className="hidden lg:flex items-center gap-8">
-              {navLinks.slice(0, 3).map((link) => (
+              {navLinks.slice(0, 2).map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -97,26 +81,21 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Logo - center */}
             <Link href="/" className="flex flex-col items-center group">
               <motion.div
                 className="relative"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <h1 className="font-[family-name:var(--font-playfair)] text-lg sm:text-xl lg:text-2xl font-bold tracking-wider">
-                  <span className="text-gradient-gold">UNIQUE VIBE</span>
+                <h1 className="font-[family-name:var(--font-playfair)] text-xl sm:text-2xl lg:text-3xl font-bold tracking-wider">
+                  <span className="text-gradient-gold">Grenix</span>
                 </h1>
-                <p className="text-[9px] sm:text-[10px] tracking-[0.35em] uppercase text-center text-[var(--fg-faint)] -mt-0.5">
-                  Grenix
-                </p>
                 <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
               </motion.div>
             </Link>
 
-            {/* Nav links - desktop right */}
             <div className="hidden lg:flex items-center gap-8">
-              {navLinks.slice(3).map((link) => (
+              {navLinks.slice(2).map((link) => (
                 <Link
                   key={link.href}
                   href={link.href}
@@ -128,31 +107,49 @@ export default function Navbar() {
               ))}
             </div>
 
-            {/* Action icons */}
             <div className="flex items-center gap-2 sm:gap-3">
-              <ThemeToggle />
-
+              {/* Theme toggle */}
               <button
-                onClick={() => setSearchOpen(true)}
-                className="p-2 text-[var(--fg-muted)] hover:text-gold transition-colors duration-300"
+                onClick={toggleTheme}
+                className="relative p-2 text-[var(--fg-muted)] hover:text-gold transition-colors duration-300"
+                aria-label="Toggle theme"
               >
-                <Search className="w-[18px] h-[18px]" />
+                <AnimatePresence mode="wait" initial={false}>
+                  {theme === "light" ? (
+                    <motion.div
+                      key="sun"
+                      initial={{ rotate: -90, opacity: 0, scale: 0 }}
+                      animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                      exit={{ rotate: 90, opacity: 0, scale: 0 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <Moon className="w-[18px] h-[18px]" />
+                    </motion.div>
+                  ) : (
+                    <motion.div
+                      key="moon"
+                      initial={{ rotate: 90, opacity: 0, scale: 0 }}
+                      animate={{ rotate: 0, opacity: 1, scale: 1 }}
+                      exit={{ rotate: -90, opacity: 0, scale: 0 }}
+                      transition={{ duration: 0.25 }}
+                    >
+                      <Sun className="w-[18px] h-[18px]" />
+                    </motion.div>
+                  )}
+                </AnimatePresence>
               </button>
-
               <Link
                 href="/wishlist"
                 className="hidden sm:block p-2 text-[var(--fg-muted)] hover:text-rose transition-colors duration-300"
               >
                 <Heart className="w-[18px] h-[18px]" />
               </Link>
-
               <Link
                 href="/account"
                 className="hidden sm:block p-2 text-[var(--fg-muted)] hover:text-[var(--fg)] transition-colors duration-300"
               >
                 <User className="w-[18px] h-[18px]" />
               </Link>
-
               <button
                 onClick={() => setIsOpen(true)}
                 className="relative p-2 text-[var(--fg-muted)] hover:text-gold transition-colors duration-300"
@@ -176,42 +173,6 @@ export default function Navbar() {
         </nav>
       </motion.header>
 
-      {/* Search Overlay */}
-      <AnimatePresence>
-        {searchOpen && (
-          <motion.div
-            className="fixed inset-0 z-[200] bg-[var(--bg)]/95 backdrop-blur-xl flex items-start justify-center pt-32"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            onClick={() => setSearchOpen(false)}
-          >
-            <motion.div
-              className="w-full max-w-2xl px-6"
-              initial={{ y: -50, opacity: 0 }}
-              animate={{ y: 0, opacity: 1 }}
-              exit={{ y: -50, opacity: 0 }}
-              transition={{ delay: 0.1 }}
-              onClick={(e) => e.stopPropagation()}
-            >
-              <div className="relative">
-                <Search className="absolute left-0 top-1/2 -translate-y-1/2 w-6 h-6 text-gold/60" />
-                <input
-                  type="text"
-                  placeholder="Search products, categories..."
-                  className="w-full bg-transparent border-b-2 border-gold/20 focus:border-gold/60 outline-none py-4 pl-10 pr-4 text-2xl font-light text-[var(--fg)] placeholder:text-[var(--fg-faint)] transition-colors duration-300"
-                  autoFocus
-                />
-              </div>
-              <p className="text-[var(--fg-faint)] text-sm mt-4">
-                Try: &quot;Rose Serum&quot;, &quot;Hair Oil&quot;, &quot;Lipstick&quot;
-              </p>
-            </motion.div>
-          </motion.div>
-        )}
-      </AnimatePresence>
-
-      {/* Mobile Menu */}
       <AnimatePresence>
         {mobileMenuOpen && (
           <motion.div
@@ -221,6 +182,15 @@ export default function Navbar() {
             exit={{ opacity: 0, x: -100 }}
             transition={{ duration: 0.4, ease: [0.25, 0.4, 0.25, 1] }}
           >
+            {/* Close button */}
+            <button
+              onClick={() => setMobileMenuOpen(false)}
+              className="absolute top-5 right-5 p-2 text-[var(--fg-muted)] hover:text-[var(--fg)] z-10"
+              aria-label="Close menu"
+            >
+              <X className="w-6 h-6" />
+            </button>
+
             <div className="flex flex-col items-center justify-center h-full gap-8">
               {navLinks.map((link, i) => (
                 <motion.div
@@ -238,21 +208,29 @@ export default function Navbar() {
                   </Link>
                 </motion.div>
               ))}
-
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.5 }}
                 className="mt-8 w-16 h-[1px] bg-gradient-to-r from-transparent via-gold/30 to-transparent"
               />
-
               <motion.div
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 transition={{ delay: 0.6 }}
                 className="flex items-center gap-6 mt-4"
               >
-                <ThemeToggle />
+                <button
+                  onClick={toggleTheme}
+                  className="text-[var(--fg-faint)] hover:text-gold transition-colors"
+                  aria-label="Toggle theme"
+                >
+                  {theme === "light" ? (
+                    <Moon className="w-5 h-5" />
+                  ) : (
+                    <Sun className="w-5 h-5" />
+                  )}
+                </button>
                 <Link
                   href="/wishlist"
                   className="text-[var(--fg-faint)] hover:text-rose transition-colors"
@@ -273,7 +251,6 @@ export default function Navbar() {
         )}
       </AnimatePresence>
 
-      {/* Cart Drawer */}
       <CartDrawer isOpen={isOpen} onClose={() => setIsOpen(false)} />
     </>
   );

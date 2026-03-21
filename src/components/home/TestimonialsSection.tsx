@@ -58,7 +58,7 @@ export default function TestimonialsSection() {
     <section ref={sectionRef} className="relative py-24 lg:py-32 overflow-hidden">
       {/* Background */}
       <motion.div style={{ y: bgY }} className="absolute inset-0">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(201,169,110,0.03),transparent_60%)]" />
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_center,rgba(42,154,92,0.06),transparent_60%)]" />
       </motion.div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative">

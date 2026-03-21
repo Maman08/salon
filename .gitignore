@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# Loose image files in root (product images)
+/*.png
+/*.jpg
+/*.jpeg
+/*.pdf
+
+# Backend env & data
+backend/.env
+backend/.env.prod
+backend/seed_images/

@@ -1,0 +1,12 @@
+node_modules
+.next
+.git
+.github
+backend
+*.md
+*.pdf
+*.png
+*.jpg
+!public/**
+.env.local
+.env*.local

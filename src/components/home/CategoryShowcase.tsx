@@ -3,6 +3,7 @@
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import Reveal from "@/components/ui/Reveal";
 
 const categories = [
@@ -11,28 +12,16 @@ const categories = [
     description: "Glow from within",
     image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=800&fit=crop",
     color: "from-rose/20 to-transparent",
-    count: "12 Products",
-  },
-  {
-    name: "Haircare",
-    description: "Salon-grade luxury",
-    image: "https://images.unsplash.com/photo-1522337360788-8b13dee7a37e?w=600&h=800&fit=crop",
-    color: "from-gold/20 to-transparent",
-    count: "8 Products",
-  },
-  {
-    name: "Makeup",
-    description: "Art of beauty",
-    image: "https://images.unsplash.com/photo-1596462502278-27bfdc403348?w=600&h=800&fit=crop",
-    color: "from-rose-dark/20 to-transparent",
-    count: "15 Products",
-  },
-  {
-    name: "Fragrance",
-    description: "Signature scents",
-    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=800&fit=crop",
-    color: "from-gold-dark/20 to-transparent",
     count: "6 Products",
+    href: "/shop?category=skincare",
+  },
+  {
+    name: "Fragrances",
+    description: "Scent that defines you",
+    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=800&fit=crop",
+    color: "from-gold/20 to-transparent",
+    count: "4 Products",
+    href: "/shop?category=fragrances",
   },
 ];
 
@@ -66,9 +55,10 @@ export default function CategoryShowcase() {
         </Reveal>
 
         {/* Categories grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 lg:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:gap-6 max-w-3xl mx-auto">
           {categories.map((category, i) => (
             <Reveal key={category.name} delay={i * 0.1}>
+              <Link href={category.href}>
               <motion.div
                 className="group relative aspect-[3/4] rounded-2xl overflow-hidden cursor-pointer"
                 whileHover={{ y: -8 }}
@@ -111,6 +101,7 @@ export default function CategoryShowcase() {
                 {/* Corner decoration */}
                 <div className="absolute top-4 right-4 w-8 h-8 border-t border-r border-[var(--border-mid)] rounded-tr-lg opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
               </motion.div>
+              </Link>
             </Reveal>
           ))}
         </div>

@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import Link from "next/link";
@@ -18,22 +18,78 @@ import {
   Check,
   ChevronDown,
 } from "lucide-react";
-import { products } from "@/data/products";
+import { fetchProductBySlug, fetchProducts } from "@/lib/api";
+import { Product, mapApiProductToProduct, mapListItemToProduct } from "@/lib/products";
 import { useCart } from "@/components/cart/CartProvider";
 import ProductCard from "@/components/product/ProductCard";
 import Reveal from "@/components/ui/Reveal";
 
 export default function ProductDetailPage() {
-  const { id } = useParams();
-  const product = products.find((p) => p.id === id);
+  const { id: slug } = useParams();
   const { addItem } = useCart();
+
+  const [product, setProduct] = useState<Product | null>(null);
+  const [relatedProducts, setRelatedProducts] = useState<Product[]>([]);
+  const [loading, setLoading] = useState(true);
+  const [notFound, setNotFound] = useState(false);
+
   const [quantity, setQuantity] = useState(1);
   const [activeImage, setActiveImage] = useState(0);
   const [isLiked, setIsLiked] = useState(false);
   const [activeTab, setActiveTab] = useState<"description" | "ingredients" | "reviews">("description");
   const [addedToCart, setAddedToCart] = useState(false);
 
-  if (!product) {
+  useEffect(() => {
+    if (!slug) return;
+
+    const load = async () => {
+      setLoading(true);
+      try {
+        const apiProduct = await fetchProductBySlug(slug as string);
+        const mapped = mapApiProductToProduct(apiProduct);
+        setProduct(mapped);
+
+        // Fetch related products (all products, then filter)
+        try {
+          const allRes = await fetchProducts({ per_page: 20 });
+          const related = allRes.items
+            .filter((p) => p.slug !== mapped.slug)
+            .slice(0, 4)
+            .map((p) => mapListItemToProduct(p));
+          setRelatedProducts(related);
+        } catch {
+          // Non-critical — ignore
+        }
+      } catch {
+        setNotFound(true);
+      } finally {
+        setLoading(false);
+      }
+    };
+    load();
+  }, [slug]);
+
+  // Loading state
+  if (loading) {
+    return (
+      <div className="min-h-screen pt-24 lg:pt-32 pb-24">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 animate-pulse">
+            <div className="aspect-square rounded-2xl bg-[var(--bg-card)]" />
+            <div className="space-y-6">
+              <div className="h-4 bg-[var(--bg-raised)] rounded w-32" />
+              <div className="h-10 bg-[var(--bg-raised)] rounded w-3/4" />
+              <div className="h-6 bg-[var(--bg-raised)] rounded w-24" />
+              <div className="h-20 bg-[var(--bg-raised)] rounded w-full" />
+              <div className="h-12 bg-[var(--bg-raised)] rounded w-full" />
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
+
+  if (notFound || !product) {
     return (
       <div className="min-h-screen flex items-center justify-center">
         <div className="text-center">
@@ -52,10 +108,6 @@ export default function ProductDetailPage() {
   const discount = product.originalPrice
     ? Math.round(((product.originalPrice - product.price) / product.originalPrice) * 100)
     : 0;
-
-  const relatedProducts = products
-    .filter((p) => p.category === product.category && p.id !== product.id)
-    .slice(0, 4);
 
   const handleAddToCart = () => {
     for (let i = 0; i < quantity; i++) {
@@ -128,11 +180,6 @@ export default function ProductDetailPage() {
                   {discount > 0 && (
                     <span className="px-3 py-1 text-xs font-semibold bg-rose/90 text-white rounded-full">
                       -{discount}% OFF
-                    </span>
-                  )}
-                  {product.usedInSalon && (
-                    <span className="px-3 py-1 text-xs tracking-wider bg-[var(--glass)] backdrop-blur-md text-[var(--fg-muted)] rounded-full border border-[var(--border-mid)]">
-                      ✨ Used in Salon
                     </span>
                   )}
                 </div>
@@ -234,7 +281,7 @@ export default function ProductDetailPage() {
                 <div className="w-full h-[1px] bg-gradient-to-r from-[var(--border)] via-[var(--border-mid)] to-[var(--border)]" />
 
                 {/* Quantity & Add to Cart */}
-                <div className="flex items-center gap-4">
+                <div className="flex flex-wrap items-center gap-3 sm:gap-4">
                   {/* Quantity */}
                   <div className="flex items-center gap-3 p-1 rounded-xl bg-[var(--glass)] border border-[var(--border)]">
                     <motion.button
@@ -261,7 +308,7 @@ export default function ProductDetailPage() {
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                     onClick={handleAddToCart}
-                    className={`flex-1 py-3.5 rounded-xl font-semibold text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 ${
+                    className={`flex-1 min-w-[160px] py-3.5 rounded-xl font-semibold text-sm tracking-wider uppercase flex items-center justify-center gap-2 transition-all duration-300 ${
                       addedToCart
                         ? "bg-green-500/20 text-green-400 border border-green-500/30"
                         : "bg-gradient-to-r from-gold to-gold-light text-[var(--btn-text)] hover:shadow-lg hover:shadow-gold/20"
@@ -296,18 +343,18 @@ export default function ProductDetailPage() {
                 </div>
 
                 {/* Trust badges */}
-                <div className="grid grid-cols-3 gap-3">
+                <div className="grid grid-cols-3 gap-2 sm:gap-3">
                   {[
                     { icon: Truck, text: "Free Shipping" },
                     { icon: Shield, text: "Authentic" },
-                    { icon: RotateCcw, text: "30-Day Return" },
+                    { icon: RotateCcw, text: "Secure Payment" },
                   ].map(({ icon: Icon, text }) => (
                     <div
                       key={text}
-                      className="flex items-center gap-2 p-2.5 rounded-lg bg-[var(--glass)] border border-[var(--border)] text-center"
+                      className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-2.5 rounded-lg bg-[var(--glass)] border border-[var(--border)] text-center"
                     >
                       <Icon className="w-3.5 h-3.5 text-gold/60 flex-shrink-0" />
-                      <span className="text-[10px] text-[var(--fg-faint)] tracking-wider">
+                      <span className="text-[9px] sm:text-[10px] text-[var(--fg-faint)] tracking-wider leading-tight">
                         {text}
                       </span>
                     </div>
