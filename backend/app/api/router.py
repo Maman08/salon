@@ -17,6 +17,7 @@ from app.api.v1.admin import (
     orders as admin_orders,
     categories as admin_categories,
     users as admin_users,
+    dashboard as admin_dashboard,
 )
 
 api_router = APIRouter(prefix="/api/v1")
@@ -35,6 +36,7 @@ api_router.include_router(addresses.router)
 
 # Admin routes
 admin_router = APIRouter(prefix="/api/v1/admin")
+admin_router.include_router(admin_dashboard.router)
 admin_router.include_router(admin_products.router)
 admin_router.include_router(admin_orders.router)
 admin_router.include_router(admin_categories.router)

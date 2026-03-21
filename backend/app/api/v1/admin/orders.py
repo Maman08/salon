@@ -24,7 +24,8 @@ async def list_all_orders(
     skip = (page - 1) * per_page
     orders = await service.get_all_orders(skip=skip, limit=per_page)
     total = await service.count_all_orders()
-    return {**paginate(total, page, per_page), "items": orders}
+    serialized = [OrderResponse.model_validate(o).model_dump() for o in orders]
+    return {**paginate(total, page, per_page), "items": serialized}
 
 
 @router.put("/{order_id}/status", response_model=OrderResponse)

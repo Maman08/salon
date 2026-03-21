@@ -7,7 +7,7 @@ import { fetchProducts, fetchCategories, ApiCategory } from "@/lib/api";
 import { Product, mapListItemToProduct, CategoryMap } from "@/lib/products";
 import ProductCard from "@/components/product/ProductCard";
 import Reveal from "@/components/ui/Reveal";
-import { SlidersHorizontal, X, ChevronDown } from "lucide-react";
+import { SlidersHorizontal, X, ChevronDown, Sparkles, Flower2, FlaskConical, type LucideIcon } from "lucide-react";
 
 const sortOptions = [
   { value: "featured", label: "Featured" },
@@ -28,8 +28,8 @@ export default function ShopPage() {
 function ShopContent() {
   const searchParams = useSearchParams();
   const [products, setProducts] = useState<Product[]>([]);
-  const [categories, setCategories] = useState<{ id: string; name: string; icon: string }[]>([
-    { id: "all", name: "All Products", icon: "✨" },
+  const [categories, setCategories] = useState<{ id: string; name: string; Icon: LucideIcon }[]>([
+    { id: "all", name: "All Products", Icon: Sparkles },
   ]);
   const [loading, setLoading] = useState(true);
   const [activeCategory, setActiveCategory] = useState(
@@ -56,11 +56,11 @@ function ShopContent() {
 
         setProducts(productRes.items.map((p) => mapListItemToProduct(p, categoryMap)));
         setCategories([
-          { id: "all", name: "All Products", icon: "✨" },
+          { id: "all", name: "All Products", Icon: Sparkles },
           ...categoryRes.map((c: ApiCategory) => ({
             id: c.slug,
             name: c.name,
-            icon: c.slug === "fragrances" ? "🌸" : "🧴",
+            Icon: c.slug === "fragrances" ? Flower2 : FlaskConical,
           })),
         ]);
       } catch (err) {
@@ -142,7 +142,7 @@ function ShopContent() {
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >
-                <span>{cat.icon}</span>
+                <cat.Icon className="w-3.5 h-3.5" />
                 <span className="tracking-wider">{cat.name}</span>
               </motion.button>
             ))}

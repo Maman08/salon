@@ -33,7 +33,8 @@ async def list_all_products(
         skip=skip, limit=per_page, search=search, is_active=False  # Show all
     )
     total = await service.count_products(is_active=False, search=search)
-    return {**paginate(total, page, per_page), "items": products}
+    serialized = [ProductResponse.model_validate(p).model_dump() for p in products]
+    return {**paginate(total, page, per_page), "items": serialized}
 
 
 @router.post("/", response_model=ProductResponse, status_code=201)

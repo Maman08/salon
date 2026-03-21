@@ -10,14 +10,16 @@ from app.models.user import User, UserRole
 from app.repositories.user import UserRepository
 from app.utils.security import decode_token
 
-security = HTTPBearer()
+security = HTTPBearer(auto_error=False)
 
 
 async def get_current_user(
-    credentials: HTTPAuthorizationCredentials = Depends(security),
+    credentials: HTTPAuthorizationCredentials | None = Depends(security),
     db: AsyncSession = Depends(get_db),
 ) -> User:
     """Extract and validate user from JWT bearer token."""
+    if not credentials:
+        raise UnauthorizedException("Not authenticated")
     token = credentials.credentials
     payload = decode_token(token)
 

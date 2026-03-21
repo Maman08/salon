@@ -234,27 +234,12 @@ export default function AccountPage() {
           </form>
         </Reveal>
 
-        {/* Quick links */}
-        <div className="space-y-3 mt-8">
-          {menuItems.map((item, i) => (
-            <Reveal key={item.label} delay={0.2 + i * 0.08}>
-              <Link href={item.href}>
-                <motion.div
-                  className="flex items-center gap-4 p-4 rounded-xl bg-[var(--bg-card)] border border-[var(--border)] hover:border-[var(--border-mid)] transition-all duration-300 group"
-                  whileHover={{ x: 4 }}
-                >
-                  <div className="w-10 h-10 rounded-lg bg-gold/10 flex items-center justify-center group-hover:scale-110 transition-transform">
-                    <item.icon className="w-4 h-4 text-gold/60" />
-                  </div>
-                  <div>
-                    <p className="text-sm font-medium">{item.label}</p>
-                    <p className="text-xs text-[var(--fg-faint)]">{item.description}</p>
-                  </div>
-                </motion.div>
-              </Link>
-            </Reveal>
-          ))}
-        </div>
+        {/* Quick links — only show login prompt */}
+        <Reveal delay={0.2}>
+          <div className="text-center mt-8 text-[var(--fg-muted)] text-sm">
+            Sign in to access your orders, wishlist, and settings.
+          </div>
+        </Reveal>
       </div>
     </div>
   );

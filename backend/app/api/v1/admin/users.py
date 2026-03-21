@@ -24,7 +24,8 @@ async def list_users(
     skip = (page - 1) * per_page
     users = await service.list_users(skip=skip, limit=per_page)
     total = await service.count_users()
-    return {**paginate(total, page, per_page), "items": users}
+    serialized = [AdminUserResponse.model_validate(u).model_dump() for u in users]
+    return {**paginate(total, page, per_page), "items": serialized}
 
 
 @router.put("/{user_id}/role", response_model=AdminUserResponse)

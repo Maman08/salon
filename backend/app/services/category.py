@@ -1,9 +1,11 @@
 from uuid import UUID
 
+from sqlalchemy import select, func
 from sqlalchemy.ext.asyncio import AsyncSession
 
-from app.exceptions import NotFoundException
+from app.exceptions import ConflictException, NotFoundException
 from app.models.category import Category
+from app.models.product import Product
 from app.repositories.category import CategoryRepository
 from app.schemas.category import CategoryCreateRequest, CategoryUpdateRequest
 
@@ -44,4 +46,14 @@ class CategoryService:
         cat = await self.category_repo.get_by_id(category_id)
         if not cat:
             raise NotFoundException("Category not found")
+        # Check if any products (active or inactive) still reference this category
+        result = await self.db.execute(
+            select(func.count()).where(Product.category_id == category_id)
+        )
+        count = result.scalar_one()
+        if count > 0:
+            raise ConflictException(
+                f"Cannot delete category: {count} product(s) are still assigned to it. "
+                "Reassign or delete those products first."
+            )
         await self.category_repo.delete(cat)

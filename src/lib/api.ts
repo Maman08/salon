@@ -421,4 +421,217 @@ export async function changePassword(data: {
   });
 }
 
+// ─── Admin Endpoints (requires admin role) ──────────────────────────────────
+
+export interface AdminDashboardStats {
+  total_products: number;
+  total_orders: number;
+  total_users: number;
+  total_revenue: number;
+  pending_orders: number;
+  low_stock_products: number;
+}
+
+export interface AdminProduct {
+  id: string;
+  name: string;
+  slug: string;
+  description: string | null;
+  short_description: string | null;
+  price: number;
+  compare_at_price: number | null;
+  sku: string | null;
+  stock_quantity: number;
+  category_id: string;
+  is_active: boolean;
+  is_featured: boolean;
+  images: ApiProductImage[];
+  created_at: string;
+}
+
+export interface AdminOrder {
+  id: string;
+  order_number: string;
+  status: string;
+  payment_status: string;
+  subtotal: number;
+  shipping_fee: number;
+  total: number;
+  shipping_address: Record<string, string>;
+  razorpay_order_id: string | null;
+  notes: string | null;
+  items: ApiOrderItem[];
+  created_at: string;
+  user?: { id: string; email: string; full_name: string };
+}
+
+export interface AdminUser {
+  id: string;
+  email: string;
+  full_name: string;
+  phone: string | null;
+  role: string;
+  is_active: boolean;
+  created_at: string;
+  updated_at: string;
+}
+
+// Admin dashboard
+export async function adminFetchDashboardStats(): Promise<{
+  total_products: number;
+  total_orders: number;
+  total_users: number;
+  total_revenue: number;
+  pending_orders: number;
+  low_stock_products: number;
+  recent_orders: { id: string; order_number: string; status: string; payment_status: string; total: number; created_at: string }[];
+}> {
+  return request("/admin/dashboard/stats");
+}
+
+// Admin products
+export async function adminFetchProducts(params?: {
+  page?: number;
+  per_page?: number;
+  search?: string;
+}): Promise<PaginatedResponse<AdminProduct>> {
+  const query = new URLSearchParams();
+  if (params?.page) query.set("page", String(params.page));
+  if (params?.per_page) query.set("per_page", String(params.per_page));
+  if (params?.search) query.set("search", params.search);
+  const qs = query.toString();
+  return request(`/admin/products/${qs ? `?${qs}` : ""}`);
+}
+
+export async function adminCreateProduct(data: {
+  name: string;
+  slug: string;
+  description?: string;
+  short_description?: string;
+  price: number;
+  compare_at_price?: number;
+  sku?: string;
+  stock_quantity: number;
+  category_id: string;
+  is_active?: boolean;
+  is_featured?: boolean;
+}): Promise<AdminProduct> {
+  return request("/admin/products/", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
+export async function adminUpdateProduct(
+  productId: string,
+  data: Record<string, unknown>
+): Promise<AdminProduct> {
+  return request(`/admin/products/${productId}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+}
+
+export async function adminDeleteProduct(productId: string): Promise<{ message: string }> {
+  return request(`/admin/products/${productId}`, { method: "DELETE" });
+}
+
+export async function adminUploadProductImage(
+  productId: string,
+  file: File,
+  isPrimary = false
+): Promise<{ id: string; url: string }> {
+  const formData = new FormData();
+  formData.append("file", file);
+  const url = `${API_BASE}/admin/products/${productId}/images?is_primary=${isPrimary}`;
+  const res = await fetch(url, {
+    method: "POST",
+    headers: { ...getAuthHeaders() },
+    body: formData,
+  });
+  if (!res.ok) {
+    const body = await res.json().catch(() => ({ detail: res.statusText }));
+    throw new ApiError(body.detail || res.statusText, res.status);
+  }
+  return res.json();
+}
+
+export async function adminDeleteProductImage(imageId: string): Promise<{ message: string }> {
+  return request(`/admin/products/images/${imageId}`, { method: "DELETE" });
+}
+
+// Admin orders
+export async function adminFetchOrders(params?: {
+  page?: number;
+  per_page?: number;
+}): Promise<PaginatedResponse<AdminOrder>> {
+  const query = new URLSearchParams();
+  if (params?.page) query.set("page", String(params.page));
+  if (params?.per_page) query.set("per_page", String(params.per_page));
+  const qs = query.toString();
+  return request(`/admin/orders/${qs ? `?${qs}` : ""}`);
+}
+
+export async function adminUpdateOrderStatus(
+  orderId: string,
+  data: { status?: string; payment_status?: string }
+): Promise<AdminOrder> {
+  return request(`/admin/orders/${orderId}/status`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+}
+
+// Admin categories
+export async function adminFetchCategories(): Promise<ApiCategory[]> {
+  return request("/admin/categories/");
+}
+
+export async function adminCreateCategory(data: {
+  name: string;
+  slug: string;
+  description?: string;
+}): Promise<ApiCategory> {
+  return request("/admin/categories/", {
+    method: "POST",
+    body: JSON.stringify(data),
+  });
+}
+
+export async function adminUpdateCategory(
+  categoryId: string,
+  data: Record<string, unknown>
+): Promise<ApiCategory> {
+  return request(`/admin/categories/${categoryId}`, {
+    method: "PUT",
+    body: JSON.stringify(data),
+  });
+}
+
+export async function adminDeleteCategory(categoryId: string): Promise<{ message: string }> {
+  return request(`/admin/categories/${categoryId}`, { method: "DELETE" });
+}
+
+// Admin users
+export async function adminFetchUsers(params?: {
+  page?: number;
+  per_page?: number;
+}): Promise<PaginatedResponse<AdminUser>> {
+  const query = new URLSearchParams();
+  if (params?.page) query.set("page", String(params.page));
+  if (params?.per_page) query.set("per_page", String(params.per_page));
+  const qs = query.toString();
+  return request(`/admin/users/${qs ? `?${qs}` : ""}`);
+}
+
+export async function adminUpdateUserRole(
+  userId: string,
+  role: string
+): Promise<AdminUser> {
+  return request(`/admin/users/${userId}/role`, {
+    method: "PUT",
+    body: JSON.stringify({ role }),
+  });
+}
+
 export { ApiError };

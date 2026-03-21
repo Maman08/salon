@@ -178,7 +178,7 @@ export default function CartDrawer({ isOpen, onClose }: CartDrawerProps) {
                     </>
                   ) : (
                     <p className="text-xs text-gold">
-                      ✨ You&apos;ve unlocked free shipping!
+                      You&apos;ve unlocked free shipping!
                     </p>
                   )}
                 </div>

@@ -1,13 +1,10 @@
 import type { Metadata } from "next";
 import { Inter, Playfair_Display } from "next/font/google";
 import "./globals.css";
-import Navbar from "@/components/layout/Navbar";
-import Footer from "@/components/layout/Footer";
-import CustomCursor from "@/components/ui/CustomCursor";
-import SmoothScroll from "@/components/ui/SmoothScroll";
 import CartProvider from "@/components/cart/CartProvider";
 import AuthProvider from "@/lib/AuthProvider";
 import ThemeProvider from "@/lib/ThemeProvider";
+import LayoutShell from "@/components/layout/LayoutShell";
 
 const inter = Inter({
   variable: "--font-inter",
@@ -41,12 +38,9 @@ export default function RootLayout({
         <ThemeProvider>
           <AuthProvider>
             <CartProvider>
-              <SmoothScroll>
-                <CustomCursor />
-                <Navbar />
-                <main>{children}</main>
-                <Footer />
-              </SmoothScroll>
+              <LayoutShell>
+                {children}
+              </LayoutShell>
             </CartProvider>
           </AuthProvider>
         </ThemeProvider>
