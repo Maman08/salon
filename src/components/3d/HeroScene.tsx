@@ -132,12 +132,23 @@ export default function HeroScene() {
   }, []);
 
   return (
-    <div className="absolute inset-0 z-0" style={{ background: bg }}>
+    <div
+      className="absolute inset-0 z-0"
+      style={{ background: bg, width: "100%", height: "100%", overflow: "hidden" }}
+    >
       <Canvas
         camera={{ position: [0, 0, 5], fov: isMobile ? 60 : 45 }}
         dpr={isMobile ? [1, 1] : [1, 1.5]}
         gl={{ antialias: !isMobile, alpha: false, powerPreference: "default" }}
-        style={{ background: bg }}
+        style={{
+          background: bg,
+          display: "block",
+          width: "100%",
+          height: "100%",
+          position: "absolute",
+          top: 0,
+          left: 0,
+        }}
       >
         <Scene bg={bg} isMobile={isMobile} />
       </Canvas>
