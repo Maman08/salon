@@ -1,6 +1,6 @@
 "use client";
 
-import { useRef } from "react";
+import { useRef, useEffect, useState } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { Float, MeshDistortMaterial, Sphere } from "@react-three/drei";
 import * as THREE from "three";
@@ -102,9 +102,66 @@ function Scene({ bg }: { bg: string }) {
   );
 }
 
+/* ── Lightweight CSS fallback for mobile ──────────────────────────────────── */
+function MobileFallback({ bg, isDark }: { bg: string; isDark: boolean }) {
+  return (
+    <div className="absolute inset-0 z-0" style={{ background: bg }}>
+      {/* Animated gradient orbs — pure CSS, no Three.js overhead */}
+      <div
+        className="absolute w-[280px] h-[280px] rounded-full blur-[100px] opacity-30 animate-float"
+        style={{
+          background: isDark
+            ? "radial-gradient(circle, #c9a96e 0%, transparent 70%)"
+            : "radial-gradient(circle, #8ecfa0 0%, transparent 70%)",
+          top: "10%",
+          left: "-8%",
+        }}
+      />
+      <div
+        className="absolute w-[220px] h-[220px] rounded-full blur-[80px] opacity-25 animate-float"
+        style={{
+          background: isDark
+            ? "radial-gradient(circle, #d4a0a0 0%, transparent 70%)"
+            : "radial-gradient(circle, #a8ddb8 0%, transparent 70%)",
+          top: "15%",
+          right: "-5%",
+          animationDelay: "-2s",
+        }}
+      />
+      <div
+        className="absolute w-[180px] h-[180px] rounded-full blur-[90px] opacity-20 animate-float"
+        style={{
+          background: isDark
+            ? "radial-gradient(circle, #e4d5b7 0%, transparent 70%)"
+            : "radial-gradient(circle, #c0eaca 0%, transparent 70%)",
+          bottom: "20%",
+          right: "10%",
+          animationDelay: "-4s",
+        }}
+      />
+    </div>
+  );
+}
+
 export default function HeroScene() {
   const { theme } = useTheme();
   const bg = theme === "dark" ? "#07090f" : "#d8f0e0";
+  const isDark = theme === "dark";
+
+  // Only render Three.js canvas on screens >= 768px
+  const [isDesktop, setIsDesktop] = useState(false);
+
+  useEffect(() => {
+    const mq = window.matchMedia("(min-width: 768px)");
+    setIsDesktop(mq.matches);
+    const handler = (e: MediaQueryListEvent) => setIsDesktop(e.matches);
+    mq.addEventListener("change", handler);
+    return () => mq.removeEventListener("change", handler);
+  }, []);
+
+  if (!isDesktop) {
+    return <MobileFallback bg={bg} isDark={isDark} />;
+  }
 
   return (
     <div className="absolute inset-0 z-0" style={{ background: bg }}>

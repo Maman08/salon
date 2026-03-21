@@ -37,14 +37,14 @@ export default function HeroSection() {
       <div className="absolute inset-0 bg-gradient-to-r from-[var(--bg)]/60 via-transparent to-[var(--bg)]/60 z-[1]" />
 
       {/* Content */}
-      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
+      <div className="relative z-10 max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20 sm:pt-0">
         {/* Badge */}
         <motion.div
           custom={0}
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-gold/10 border border-gold/20 mb-8"
+          className="inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-gold/10 border border-gold/20 mb-6 sm:mb-8"
         >
           <span className="w-1.5 h-1.5 rounded-full bg-gold animate-pulse" />
           <span className="text-[10px] sm:text-xs tracking-widest uppercase text-gold-light">
@@ -53,24 +53,24 @@ export default function HeroSection() {
         </motion.div>
 
         {/* Main heading */}
-        <div className="overflow-hidden mb-6">
+        <div className="overflow-hidden mb-3 sm:mb-6">
           <motion.h1
             custom={1}
             variants={textVariants}
             initial="hidden"
             animate="visible"
-            className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight"
+            className="font-[family-name:var(--font-playfair)] text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1] tracking-tight"
           >
             Redefine Your
           </motion.h1>
         </div>
-        <div className="overflow-hidden mb-8">
+        <div className="overflow-hidden mb-6 sm:mb-8">
           <motion.h1
             custom={2}
             variants={textVariants}
             initial="hidden"
             animate="visible"
-            className="font-[family-name:var(--font-playfair)] text-4xl sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[0.95] tracking-tight"
+            className="font-[family-name:var(--font-playfair)] text-[2.5rem] sm:text-5xl md:text-6xl lg:text-7xl xl:text-8xl font-bold leading-[1] tracking-tight"
           >
             <span className="text-gradient-gold">Beauty</span>{" "}
             <span className="text-gradient-rose">Ritual</span>
@@ -83,7 +83,7 @@ export default function HeroSection() {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="max-w-xl mx-auto text-[var(--fg-muted)] text-base sm:text-lg leading-relaxed mb-10"
+          className="max-w-xl mx-auto text-[var(--fg-muted)] text-sm sm:text-base lg:text-lg leading-relaxed mb-8 sm:mb-10"
         >
           Luxury beauty essentials, expertly curated for your every ritual.
           <br className="hidden sm:block" />
@@ -96,16 +96,16 @@ export default function HeroSection() {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="flex flex-col sm:flex-row items-center justify-center gap-4"
+          className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4"
         >
           <Link href="/shop">
-            <MagneticButton className="group px-8 py-4 bg-gradient-to-r from-gold to-gold-light text-[var(--btn-text)] font-semibold text-sm tracking-wider uppercase rounded-full flex items-center gap-2 hover:shadow-xl hover:shadow-gold/20 transition-shadow duration-500">
+            <MagneticButton className="group px-6 sm:px-8 py-3.5 sm:py-4 bg-gradient-to-r from-gold to-gold-light text-[var(--btn-text)] font-semibold text-sm tracking-wider uppercase rounded-full flex items-center gap-2 hover:shadow-xl hover:shadow-gold/20 transition-shadow duration-500">
               Explore Collection
               <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
             </MagneticButton>
           </Link>
           <Link href="/about">
-            <MagneticButton className="group px-8 py-4 border border-[var(--border-mid)] hover:border-[var(--border-mid)] text-[var(--fg-muted)] hover:text-[var(--fg)] font-medium text-sm tracking-wider uppercase rounded-full flex items-center gap-2 transition-all duration-300">
+            <MagneticButton className="group px-6 sm:px-8 py-3.5 sm:py-4 border border-[var(--border-mid)] hover:border-[var(--border-mid)] text-[var(--fg-muted)] hover:text-[var(--fg)] font-medium text-sm tracking-wider uppercase rounded-full flex items-center gap-2 transition-all duration-300">
               <Play className="w-4 h-4" />
               Our Story
             </MagneticButton>
@@ -118,7 +118,7 @@ export default function HeroSection() {
           variants={textVariants}
           initial="hidden"
           animate="visible"
-          className="mt-16 lg:mt-24 flex items-center justify-center gap-6 sm:gap-16"
+          className="mt-10 sm:mt-16 lg:mt-24 flex items-center justify-center gap-6 sm:gap-16"
         >
           {[
             { number: "6+", label: "Products" },

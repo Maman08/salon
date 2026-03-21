@@ -27,7 +27,7 @@ export default function BrandStory() {
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-20 items-center">
           {/* Left — image */}
           <Reveal direction="left">
-            <motion.div style={{ scale, opacity }} className="relative">
+            <motion.div style={{ scale, opacity }} className="relative overflow-hidden sm:overflow-visible">
               <div className="relative aspect-[4/5] rounded-2xl overflow-hidden">
                 <div className="absolute inset-0 bg-gradient-to-br from-gold/10 via-rose/5 to-transparent z-10" />
                 <img
