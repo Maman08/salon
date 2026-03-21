@@ -12,9 +12,6 @@ import {
   Minus,
   Plus,
   ArrowLeft,
-  Truck,
-  Shield,
-  RotateCcw,
   Check,
   ChevronDown,
 } from "lucide-react";
@@ -340,25 +337,6 @@ export default function ProductDetailPage() {
                   >
                     <Heart className={`w-5 h-5 ${isLiked ? "fill-current" : ""}`} />
                   </motion.button>
-                </div>
-
-                {/* Trust badges */}
-                <div className="grid grid-cols-3 gap-2 sm:gap-3">
-                  {[
-                    { icon: Truck, text: "Free Shipping" },
-                    { icon: Shield, text: "Authentic" },
-                    { icon: RotateCcw, text: "Secure Payment" },
-                  ].map(({ icon: Icon, text }) => (
-                    <div
-                      key={text}
-                      className="flex flex-col sm:flex-row items-center gap-1 sm:gap-2 p-2 sm:p-2.5 rounded-lg bg-[var(--glass)] border border-[var(--border)] text-center"
-                    >
-                      <Icon className="w-3.5 h-3.5 text-gold/60 flex-shrink-0" />
-                      <span className="text-[9px] sm:text-[10px] text-[var(--fg-faint)] tracking-wider leading-tight">
-                        {text}
-                      </span>
-                    </div>
-                  ))}
                 </div>
 
                 {/* Tabs */}
