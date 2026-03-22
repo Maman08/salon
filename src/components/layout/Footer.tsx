@@ -16,14 +16,6 @@ const footerLinks = {
   ],
   Company: [
     { label: "Our Story", href: "/about" },
-    { label: "Collections", href: "/collections" },
-    { label: "Customer Reviews", href: "/#reviews" },
-    { label: "Contact Us", href: "/contact" },
-  ],
-  Support: [
-    { label: "Shipping Info", href: "/shipping" },
-    { label: "FAQ", href: "/faq" },
-    { label: "Privacy Policy", href: "/privacy" },
   ],
 };
 
@@ -73,12 +65,12 @@ export default function Footer() {
                 <li className="flex items-center gap-2.5 text-sm text-[var(--fg-muted)]">
                   <Instagram className="w-4 h-4 flex-shrink-0 text-gold/40" />
                   <a
-                    href="https://www.instagram.com/unique_vibe_grenix"
+                    href="https://www.instagram.com/uniquevibegrenix"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="hover:text-gold transition-colors duration-300"
                   >
-                    @unique_vibe_grenix
+                    @uniquevibegrenix
                   </a>
                 </li>
               </ul>
@@ -100,7 +92,7 @@ export default function Footer() {
 
           <div className="flex items-center gap-4">
             <a
-              href="https://www.instagram.com/unique_vibe_grenix"
+              href="https://www.instagram.com/uniquevibegrenix"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 text-[var(--fg-muted)] opacity-40 hover:opacity-100 hover:text-gold transition-all duration-300"

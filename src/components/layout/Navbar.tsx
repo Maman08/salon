@@ -11,7 +11,6 @@ import { useTheme } from "@/lib/ThemeProvider";
 const navLinks = [
   { href: "/", label: "Home" },
   { href: "/shop", label: "Shop" },
-  { href: "/collections", label: "Collections" },
   { href: "/about", label: "Our Story" },
 ];
 

@@ -85,13 +85,13 @@ export default function CTASection() {
                 </motion.button>
               </Link>
 
-              <Link href="/collections">
+              <Link href="/about">
                 <motion.button
                   whileHover={{ scale: 1.05 }}
                   whileTap={{ scale: 0.95 }}
                   className="px-10 py-4 border border-rose/30 hover:border-rose/50 text-rose-light/70 hover:text-rose-light text-sm tracking-wider uppercase rounded-full transition-all duration-300"
                 >
-                  Explore Collections
+                  Our Story
                 </motion.button>
               </Link>
             </div>

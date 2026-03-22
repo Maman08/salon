@@ -72,6 +72,7 @@ export default function CollectionsPage() {
         <div className="space-y-8">
           {collections.map((collection, i) => (
             <Reveal key={collection.id} delay={i * 0.1}>
+              <Link href={`/shop?collection=${collection.id}`} className="block">
               <motion.div
                 className="group relative rounded-3xl overflow-hidden cursor-pointer"
                 whileHover={{ y: -4 }}
@@ -113,6 +114,7 @@ export default function CollectionsPage() {
                   style={{ borderColor: `${collection.color}20` }}
                 />
               </motion.div>
+              </Link>
             </Reveal>
           ))}
         </div>
