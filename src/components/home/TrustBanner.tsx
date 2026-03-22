@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion";
 import Reveal from "@/components/ui/Reveal";
-import { Truck, Shield, Headphones, Sparkles, Award, Lock } from "lucide-react";
+import { Shield, Sparkles, Award, Lock } from "lucide-react";
 
 const features = [
   {
@@ -10,12 +10,6 @@ const features = [
     title: "Pro Formulated",
     description: "Every product is crafted with professional-grade ingredients and formulations",
     color: "#c9a96e",
-  },
-  {
-    icon: Truck,
-    title: "Free Shipping",
-    description: "Complimentary delivery on all orders above ₹1999",
-    color: "#d4a0a0",
   },
   {
     icon: Shield,
@@ -28,12 +22,6 @@ const features = [
     title: "Secure Checkout",
     description: "Safe & encrypted payments with trusted gateways",
     color: "#b89ec9",
-  },
-  {
-    icon: Headphones,
-    title: "Expert Advice",
-    description: "Get personalized beauty consultation from our professionals",
-    color: "#c9a96e",
   },
   {
     icon: Award,
@@ -60,7 +48,7 @@ export default function TrustBanner() {
           </div>
         </Reveal>
 
-        <div className="grid grid-cols-2 md:grid-cols-3 gap-4 lg:gap-6">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 lg:gap-6">
           {features.map((feature, i) => (
             <Reveal key={feature.title} delay={i * 0.08}>
               <motion.div
