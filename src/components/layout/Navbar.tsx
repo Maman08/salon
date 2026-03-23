@@ -80,16 +80,25 @@ export default function Navbar() {
               ))}
             </div>
 
-            <Link href="/" className="flex flex-col items-center group">
+            <Link href="/" className="flex items-center gap-2.5 group">
               <motion.div
-                className="relative"
+                className="relative flex items-center gap-2.5"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                <h1 className="font-[family-name:var(--font-playfair)] text-xl sm:text-2xl lg:text-3xl font-bold tracking-wider">
-                  <span className="text-gradient-gold">Grenix</span>
-                </h1>
-                <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-8 h-[1px] bg-gradient-to-r from-transparent via-gold/40 to-transparent" />
+                {/* Logo badge */}
+                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl border border-[var(--border-mid)] bg-[var(--bg-card)] flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
+                  <img
+                    src="/logo.png"
+                    alt="Unique Vibe Grenix logo"
+                    className="w-full h-full object-cover scale-110"
+                  />
+                </div>
+                {/* Company name */}
+                <div className="flex flex-col leading-none">
+                  <span className="font-[family-name:var(--font-playfair)] text-[10px] tracking-[0.2em] uppercase text-[var(--fg-faint)]">Unique Vibe</span>
+                  <span className="font-[family-name:var(--font-playfair)] text-base sm:text-lg font-bold tracking-wide text-gradient-gold leading-tight">Grenix</span>
+                </div>
               </motion.div>
             </Link>
 

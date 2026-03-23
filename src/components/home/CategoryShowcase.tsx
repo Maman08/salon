@@ -10,7 +10,8 @@ const categories = [
   {
     name: "Skincare",
     description: "Glow from within",
-    image: "https://images.unsplash.com/photo-1556228578-0d85b1a4d571?w=600&h=800&fit=crop",
+    video: "/skincareanmiation.mp4",
+    image: undefined,
     color: "from-rose/20 to-transparent",
     count: "6 Products",
     href: "/shop?category=skincare",
@@ -18,7 +19,8 @@ const categories = [
   {
     name: "Fragrances",
     description: "Scent that defines you",
-    image: "https://images.unsplash.com/photo-1541643600914-78b084683601?w=600&h=800&fit=crop",
+    image: undefined,
+    video: "/fragnance.mp4",
     color: "from-gold/20 to-transparent",
     count: "4 Products",
     href: "/shop?category=fragrances",
@@ -65,14 +67,25 @@ export default function CategoryShowcase() {
                 whileHover={{ y: -8 }}
                 transition={{ type: "spring", stiffness: 300, damping: 20 }}
               >
-                {/* Image */}
-                <Image
-                  src={category.image}
-                  alt={category.name}
-                  fill
-                  className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
-                  sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
-                />
+                {/* Media — video for skincare, image for others */}
+                {category.video ? (
+                  <video
+                    src={category.video}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    className="absolute inset-0 w-full h-full object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                  />
+                ) : (
+                  <Image
+                    src={category.image!}
+                    alt={category.name}
+                    fill
+                    className="object-cover group-hover:scale-110 transition-transform duration-700 ease-out"
+                    sizes="(max-width: 768px) 100vw, (max-width: 1024px) 50vw, 25vw"
+                  />
+                )}
 
                 {/* Gradient overlay */}
                 <div className="absolute inset-0 bg-gradient-to-t from-[var(--bg)] via-[var(--bg)]/40 to-transparent" />

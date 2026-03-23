@@ -19,10 +19,10 @@ const playfair = Playfair_Display({
 });
 
 export const metadata: Metadata = {
-  title: "Grenix | Premium Beauty Products",
+  title: "Unique Vibe Grenix | Premium Beauty Products",
   description:
-    "Discover luxury beauty products crafted for the modern woman and man. Premium skincare and fragrance essentials — experience the Grenix difference.",
-  keywords: ["beauty", "skincare", "fragrance", "premium", "luxury", "cosmetics"],
+    "Discover luxury beauty products crafted for the modern woman and man. Premium skincare and fragrance essentials — experience the Unique Vibe Grenix difference.",
+  keywords: ["beauty", "skincare", "fragrance", "premium", "luxury", "cosmetics", "unique vibe grenix"],
 };
 
 export default function RootLayout({

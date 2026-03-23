@@ -11,8 +11,8 @@ const testimonials = [
     role: "Loyal Client • 3 years",
     avatar: "PS",
     rating: 5,
-    text: "The Rose Serum completely transformed my skin. I discovered it through a recommendation and I've been reordering ever since. The quality is absolutely stunning — pure luxury in a bottle.",
-    product: "Luminous Rose Serum",
+    text: "The Vitamin C Serum completely transformed my skin. I discovered it through a recommendation and I've been reordering ever since. The quality is absolutely stunning — pure luxury in a bottle.",
+    product: "Vitamin C Face Serum",
     color: "#d4a0a0",
   },
   {
@@ -20,8 +20,8 @@ const testimonials = [
     role: "First-time Buyer",
     avatar: "RM",
     rating: 5,
-    text: "I was skeptical about buying beauty products online, but the 3D previews and detailed descriptions convinced me. The Golden Elixir Hair Oil is absolutely premium.",
-    product: "Golden Elixir Hair Oil",
+    text: "I was skeptical about buying beauty products online, but the detailed descriptions convinced me. The Foaming Face Wash leaves my skin so fresh and clean — absolutely premium quality.",
+    product: "Foaming Face Wash",
     color: "#c9a96e",
   },
   {
@@ -29,8 +29,8 @@ const testimonials = [
     role: "Beauty Enthusiast",
     avatar: "AP",
     rating: 5,
-    text: "Finally, a beauty brand that feels truly authentic! You can tell these products are expertly formulated. The Midnight Oud is now my signature scent. I get compliments every single time.",
-    product: "Midnight Oud Perfume",
+    text: "Finally, a beauty brand that feels truly authentic! The BTS Itra is now my signature scent. I get compliments every single time I wear it. You can tell it's expertly crafted.",
+    product: "BTS Itra",
     color: "#9e6b6b",
   },
   {
@@ -38,8 +38,8 @@ const testimonials = [
     role: "Makeup Artist",
     avatar: "KR",
     rating: 5,
-    text: "As a professional MUA, I'm very particular about quality. The Diamond Glow Foundation has the most natural finish I've ever worked with. My clients love it!",
-    product: "Diamond Glow Foundation",
+    text: "As a professional MUA, I'm very particular about quality. The Tinted Sunscreen SPF 50 gives the most natural, dewy finish I've ever worked with. My clients absolutely love it!",
+    product: "Tinted Sunscreen SPF 50",
     color: "#e8c99b",
   },
 ];

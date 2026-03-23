@@ -20,10 +20,21 @@ export default function Footer() {
           {/* Brand blurb */}
           <Reveal delay={0}>
             <div>
-              <span className="font-[family-name:var(--font-playfair)] text-xl text-gradient-gold tracking-widest">
-                GRENIX
-              </span>
-              <p className="mt-3 text-sm text-[var(--fg-faint)] leading-relaxed max-w-xs">
+              {/* Logo + name lockup */}
+              <div className="flex items-center gap-3 mb-4">
+                <div className="w-10 h-10 rounded-xl border border-[var(--border-mid)] bg-[var(--bg-raised)] flex items-center justify-center overflow-hidden shrink-0">
+                  <img
+                    src="/logo.png"
+                    alt="Unique Vibe Grenix logo"
+                    className="w-full h-full object-cover scale-125"
+                  />
+                </div>
+                <div className="flex flex-col leading-none">
+                  <span className="font-[family-name:var(--font-playfair)] text-[9px] tracking-[0.2em] uppercase text-[var(--fg-faint)]">Unique Vibe</span>
+                  <span className="font-[family-name:var(--font-playfair)] text-lg font-bold tracking-wide text-gradient-gold leading-tight">Grenix</span>
+                </div>
+              </div>
+              <p className="text-sm text-[var(--fg-faint)] leading-relaxed max-w-xs">
                 Luxury beauty essentials crafted with premium ingredients, delivered with care.
               </p>
             </div>
