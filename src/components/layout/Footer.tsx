@@ -22,16 +22,19 @@ export default function Footer() {
             <div>
               {/* Logo + name lockup */}
               <div className="flex items-center gap-3 mb-4">
-                <div className="w-10 h-10 rounded-xl border border-[var(--border-mid)] bg-[var(--bg-raised)] flex items-center justify-center overflow-hidden shrink-0">
-                  <img
-                    src="/logo.png"
-                    alt="Unique Vibe Grenix logo"
-                    className="w-full h-full object-cover scale-125"
-                  />
-                </div>
+                <img
+                  src="/logo-final.png"
+                  alt="Unique Vibe Grenix logo"
+                  className="h-12 w-auto object-contain"
+                />
                 <div className="flex flex-col leading-none">
-                  <span className="font-[family-name:var(--font-playfair)] text-[9px] tracking-[0.2em] uppercase text-[var(--fg-faint)]">Unique Vibe</span>
-                  <span className="font-[family-name:var(--font-playfair)] text-lg font-bold tracking-wide text-gradient-gold leading-tight">Grenix</span>
+                  <span className="font-[family-name:var(--font-playfair)] text-[9px] tracking-[0.25em] uppercase text-[var(--fg-faint)]">Unique Vibe</span>
+                  <span
+                    className="font-[family-name:var(--font-playfair)] text-xl font-bold tracking-wide text-gradient-gold leading-tight"
+                    style={{ textShadow: "0 0 20px rgba(201,169,110,0.6), 0 0 40px rgba(201,169,110,0.3)" }}
+                  >
+                    Grenix
+                  </span>
                 </div>
               </div>
               <p className="text-sm text-[var(--fg-faint)] leading-relaxed max-w-xs">

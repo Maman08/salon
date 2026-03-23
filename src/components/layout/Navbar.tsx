@@ -80,24 +80,32 @@ export default function Navbar() {
               ))}
             </div>
 
-            <Link href="/" className="flex items-center gap-2.5 group">
+            <Link href="/" className="flex items-center gap-1 group">
               <motion.div
-                className="relative flex items-center gap-2.5"
+                className="relative flex items-center gap-1"
                 whileHover={{ scale: 1.02 }}
                 transition={{ type: "spring", stiffness: 300 }}
               >
-                {/* Logo badge */}
-                <div className="w-11 h-11 sm:w-12 sm:h-12 rounded-xl border border-[var(--border-mid)] bg-[var(--bg-card)] flex items-center justify-center overflow-hidden shrink-0 shadow-sm">
-                  <img
-                    src="/logo.png"
-                    alt="Unique Vibe Grenix logo"
-                    className="w-full h-full object-cover scale-110"
-                  />
-                </div>
+                {/* Logo */}
+                <img
+                  src="/logo-final.png"
+                  alt="Unique Vibe Grenix logo"
+                  className="h-16 sm:h-20 w-auto object-contain"
+                />
                 {/* Company name */}
-                <div className="flex flex-col leading-none">
-                  <span className="font-[family-name:var(--font-playfair)] text-[10px] tracking-[0.2em] uppercase text-[var(--fg-faint)]">Unique Vibe</span>
-                  <span className="font-[family-name:var(--font-playfair)] text-base sm:text-lg font-bold tracking-wide text-gradient-gold leading-tight">Grenix</span>
+                <div className="flex flex-col leading-none gap-0.5">
+                  <span className="font-[family-name:var(--font-playfair)] text-[11px] tracking-[0.3em] uppercase text-[var(--fg-muted)]">
+                    Unique Vibe
+                  </span>
+                  <span
+                    className="font-[family-name:var(--font-playfair)] text-2xl sm:text-3xl font-bold tracking-wider text-gradient-gold leading-none"
+                    style={{
+                      textShadow:
+                        "0 0 10px rgba(201,169,110,0.9), 0 0 25px rgba(201,169,110,0.6), 0 0 50px rgba(201,169,110,0.35)",
+                    }}
+                  >
+                    Grenix
+                  </span>
                 </div>
               </motion.div>
             </Link>
