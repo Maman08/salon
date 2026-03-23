@@ -90,7 +90,7 @@ export default function Navbar() {
                 <img
                   src="/logo-final.png"
                   alt="Unique Vibe Grenix logo"
-                  className="h-16 sm:h-20 w-auto object-contain"
+                  className="h-20 sm:h-34 w-auto object-contain"
                 />
                 {/* Company name */}
                 <div className="flex flex-col leading-none gap-0.5">
