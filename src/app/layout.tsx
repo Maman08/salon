@@ -81,7 +81,7 @@ export const metadata: Metadata = {
     canonical: "https://grenix.store",
   },
   verification: {
-    google: "", // Add your Google Search Console verification token here
+    google: "WUmydWsWe1Tn7YaN7OhJOxRSB275EOrLDvtrp6tOmrM",
   },
 };
 
