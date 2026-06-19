@@ -18,6 +18,9 @@ class Settings(BaseSettings):
     S3_SECRET_KEY: str = "minioadmin"
     S3_BUCKET_NAME: str = "grenix-media"
     S3_REGION: str = "ap-south-1"
+    # Public base URL browsers use to load media (Nginx -> MinIO in prod).
+    # Falls back to S3_ENDPOINT_URL when unset (local dev).
+    S3_PUBLIC_URL: str = ""
 
     # Razorpay
     RAZORPAY_KEY_ID: str = ""
