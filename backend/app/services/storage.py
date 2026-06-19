@@ -40,10 +40,12 @@ class StorageService:
             ContentType=content_type,
         )
 
-        # Build URL
+        # Build the PUBLIC URL (what browsers load), which may differ from the
+        # internal upload endpoint above (e.g. media.grenix.store -> MinIO).
         if settings.S3_ENDPOINT_URL and "amazonaws.com" not in settings.S3_ENDPOINT_URL:
-            # MinIO / local — path-style URL
-            return f"{settings.S3_ENDPOINT_URL}/{self.bucket}/{key}"
+            # MinIO / local — path-style URL. Prefer the public base if set.
+            base = settings.S3_PUBLIC_URL or settings.S3_ENDPOINT_URL
+            return f"{base}/{self.bucket}/{key}"
         else:
             # AWS S3 — virtual-hosted style URL
             return f"https://{self.bucket}.s3.{settings.S3_REGION}.amazonaws.com/{key}"

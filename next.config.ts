@@ -17,6 +17,11 @@ const nextConfig: NextConfig = {
       },
       {
         protocol: "https",
+        hostname: "media.grenix.store",
+        pathname: "/grenix-media/**",
+      },
+      {
+        protocol: "https",
         hostname: "grenix-media.s3.ap-south-1.amazonaws.com",
         pathname: "/**",
       },
