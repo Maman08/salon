@@ -49,4 +49,4 @@ next-env.d.ts
 # Backend env & data
 backend/.env
 backend/.env.prod
-backend/seed_images/
+# seed_images/ committed intentionally — product seed assets used by seed.py
